@@ -1,65 +1,41 @@
-\# Registro de uso de inteligencia artificial
-
-
+# Registro de uso de inteligencia artificial
 
 Proyecto: TP-01 — Río Damas en Tacamo
 
 Código CAMELS: 10362001
 
+## Organización del trabajo y preparación del repositorio
 
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la distribución de tareas y orientar la preparación del repositorio.
+- Componente del trabajo: propuesta de tareas, estructura de carpetas, instrucciones de Git y README.md.
+- Ejemplos de ayuda obtenida: propuesta de tareas por integrante, explicación de comandos y redacción de instrucciones para ejecutar el proyecto.
+- Verificación: se abrió el README local y se confirmó que su apartado 8 contenía las instrucciones actualizadas. Queda pendiente documentar la revisión completa de la propuesta de tareas y la estructura frente al enunciado.
+- Correcciones relevantes: pendientes de registrar según los resultados de esa revisión.
 
-\## Organización del trabajo y preparación del repositorio
+## Preparación inicial en R y registro de fuentes
 
+- Herramienta utilizada: ChatGPT.
+- Finalidad: ayudar a preparar la ejecución inicial del proyecto y el registro de sus fuentes de datos.
+- Componente del trabajo: `02_Rscripts/00_setup.R`, `02_Rscripts/run_all.R`, `04_metadata/R_sessionInfo.txt` y plantilla de `04_metadata/data_sources.csv`.
+- Ejemplos de ayuda obtenida: código para comprobar carpetas, ejecutar scripts en orden, registrar el entorno de R y crear los encabezados del registro de fuentes.
+- Verificación: en la versión inicial, antes de incorporar la lectura de parametros.csv, `run_all.R` terminó sin errores. La comprobación `file.exists("04_metadata/R_sessionInfo.txt")` devolvió `TRUE`. Queda pendiente registrar el resultado de la comprobación de `data_sources.csv`.
+- Correcciones relevantes: no se registraron correcciones al código de preparación inicial después de esa primera comprobación. Los problemas detectados al incorporar la configuración se documentan en las siguientes entradas.
 
+## Configuración de parámetros y revisión del CSV
 
-\- Herramienta utilizada: ChatGPT.
-
-\- Finalidad: apoyar la distribución de tareas y orientar la preparación del repositorio.
-
-\- Componente del trabajo: propuesta de tareas, estructura de carpetas, instrucciones de Git y README.md.
-
-\- Ejemplos de ayuda obtenida: propuesta de tareas por integrante, explicación de comandos y redacción de instrucciones para ejecutar el proyecto.
-
-\- Verificación: se abrió el README local y se confirmó que su apartado 8 contenía las instrucciones actualizadas. Queda pendiente documentar la revisión completa de la propuesta de tareas y la estructura frente al enunciado.
-
-\- Correcciones relevantes: pendientes de registrar según los resultados de esa revisión.
-
-
-
-\## Preparación inicial en R y registro de fuentes
-
-
-
-\- Herramienta utilizada: ChatGPT.
-
-\- Finalidad: ayudar a preparar la ejecución inicial del proyecto y el registro de sus fuentes de datos.
-
-\- Componente del trabajo: 00\_setup.R, run\_all.R, R\_sessionInfo.txt y plantilla de data\_sources.csv.
-
-\- Ejemplos de ayuda obtenida: código para comprobar carpetas, ejecutar scripts en orden, registrar el entorno de R y crear los encabezados del registro de fuentes.
-
-\- Verificación: run\_all.R terminó sin errores y la comprobación de existencia de 04\_metadata/R\_sessionInfo.txt devolvió TRUE. Queda pendiente registrar el resultado de la comprobación de data\_sources.csv.
-
-\- Correcciones relevantes: no se han registrado correcciones posteriores a las comprobaciones indicadas.
-
-
-
-\## Configuración de parámetros y revisión del CSV
-
-
-
-Se utilizó ChatGPT para preparar `06\\\_config/parametros.csv` con el nombre de la cuenca y el código CAMELS 10362001, y para incorporar su lectura en `02\\\_Rscripts/00\\\_setup.R`. La finalidad fue centralizar los parámetros compartidos del proyecto. La ayuda incluyó el contenido del CSV, el código de lectura y las instrucciones para conservar el identificador CAMELS como texto.
-
-
-
-Durante la verificación, la ejecución de `run\\\_all.R` se detuvo con el mensaje “no lines available in input”. Se examinó el archivo mediante `readLines("06\\\_config/parametros.csv", warn = FALSE)`, que devolvió `character(0)`, confirmando que el archivo leído no contenía líneas.
-
-
-
-Como corrección, ChatGPT propuso escribir las tres líneas del CSV mediante `writeLines()` desde la consola de RStudio. Queda pendiente registrar la aplicación de esta corrección y comprobar que `run\\\_all.R` termine sin errores y que `config\\\_tp$codigo\\\_camels` devuelva `"10362001"`.
-
+- Herramienta utilizada: ChatGPT.
+- Finalidad: centralizar los parámetros compartidos del proyecto y ayudar a resolver el error de lectura del archivo de configuración.
+- Componente del trabajo: `06_config/parametros.csv`, su lectura desde `02_Rscripts/00_setup.R` y su incorporación al flujo de `02_Rscripts/run_all.R`.
+- Ejemplos de ayuda obtenida: contenido del CSV con el nombre de la cuenca y el código CAMELS 10362001, código para leer los parámetros conservando el identificador como texto e instrucciones para diagnosticar un archivo vacío.
+- Verificación: al incorporar la configuración, `run_all.R` se detuvo con el mensaje “no lines available in input”. La comprobación `readLines("06_config/parametros.csv", warn = FALSE)` devolvió `character(0)`, confirmando que el archivo leído no contenía líneas. Queda pendiente confirmar que, después de guardar su contenido, `run_all.R` termine sin errores y que `config_tp$codigo_camels` devuelva `"10362001"`.
+- Correcciones relevantes: se propuso completar el CSV mediante `writeLines()` desde la consola de RStudio. Posteriormente, se identificó y corrigió un problema de guardado en el Bloc de notas, descrito en la siguiente entrada.
 
 ## Corrección del guardado local
 
-Se utilizó ChatGPT para interpretar el estado de Git y orientar la publicación de los cambios en README.md, AI_USAGE.md y parametros.csv. Se detectó que el contenido editado en el Bloc de notas no se había guardado porque se había indicado un atajo incorrecto para la versión utilizada. Se corrigió la instrucción usando Ctrl + G. Después de guardar, se comprobó mediante git status que los tres archivos aparecían como modificados. Esta comprobación confirma el guardado local; la publicación se verificará revisando los archivos en GitHub después de subirlos.
-
+- Herramienta utilizada: ChatGPT.
+- Finalidad: identificar por qué los cambios no aparecían en GitHub y orientar su guardado y publicación.
+- Componente del trabajo: `README.md`, `05_docs/AI_USAGE.md`, `06_config/parametros.csv` y procedimiento de actualización del repositorio.
+- Ejemplos de ayuda obtenida: interpretación de `git status` y explicación de los comandos `git add`, `git commit` y `git push`.
+- Verificación: después de guardar el contenido localmente, `git status` mostró los tres archivos como modificados. Queda pendiente registrar la comprobación del contenido publicado en GitHub después de subir los cambios.
+- Correcciones relevantes: se corrigió la instrucción de guardado del Bloc de notas, reemplazando Ctrl + S por Ctrl + G, correspondiente a la versión utilizada.
