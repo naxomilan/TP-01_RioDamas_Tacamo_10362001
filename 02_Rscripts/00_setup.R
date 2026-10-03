@@ -51,6 +51,34 @@ if (length(paquetes_faltantes) > 0) {
   )
 }
 
+# Leer la configuracion compartida del proyecto
+archivo_config_tp <- "06_config/parametros.csv"
+
+if (!file.exists(archivo_config_tp)) {
+  stop(
+    "No se encuentra el archivo 06_config/parametros.csv.",
+    call. = FALSE
+  )
+}
+
+parametros_tp <- read.csv(
+  archivo_config_tp,
+  colClasses = "character",
+  stringsAsFactors = FALSE,
+  fileEncoding = "UTF-8"
+)
+
+config_tp <- as.list(
+  setNames(parametros_tp$valor, parametros_tp$parametro)
+)
+
+message(
+  "Configuracion cargada: ",
+  config_tp$nombre_cuenca,
+  " — codigo CAMELS: ",
+  config_tp$codigo_camels
+)
+
 # 4. Registrar las versiones de R, plataforma y paquetes cargados
 capture.output(
   utils::sessionInfo(),
