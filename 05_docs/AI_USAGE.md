@@ -93,3 +93,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: revisión de las reglas existentes, incorporación de exclusiones para archivos del sistema operativo y redacción del procedimiento para documentar datos excluidos.
 - Verificación: se revisaron las reglas proporcionadas y se consultó la documentación oficial de Git. La comprobación mediante `git check-ignore` no mostró coincidencias para los archivos del proyecto examinados. Queda pendiente comprobar los cambios publicados en GitHub.
 - Correcciones relevantes: se conservaron las reglas existentes, se añadieron las exclusiones de archivos del sistema operativo y se documentó la obligación de registrar la obtención de los datos excluidos.
+
+## Prueba inicial desde una copia nueva
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: comprobar que la preparación inicial del proyecto funcione utilizando los archivos publicados en GitHub y resolver los avisos detectados.
+- Componente del trabajo: clonación del repositorio, proyecto de RStudio, `00_setup.R`, `run_all.R`, `parametros.csv` y `R_sessionInfo.txt`.
+- Ejemplos de ayuda obtenida: instrucciones para probar una copia nueva, comprobar la regeneración del registro de R, validar el código CAMELS e interpretar el aviso sobre la última línea del CSV.
+- Verificación: la prueba en la copia nueva terminó correctamente, regeneró `R_sessionInfo.txt` y confirmó el código CAMELS `"10362001"`. Se detectó un aviso por falta de salto de línea al final de `parametros.csv`. Después de corregirlo en el repositorio original, se comprobó la lectura del CSV sin ese aviso. La prueba abarcó la preparación inicial y se realizó en el mismo computador.
+- Correcciones relevantes: se añadió un salto de línea al final de `06_config/parametros.csv`, conservando sus valores.
