@@ -48,3 +48,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: reorganización de las diez secciones, corrección de encabezados y viñetas, y reconstrucción de los bloques de código y las rutas.
 - Verificación: se revisó el texto facilitado y se identificaron símbolos # sobrantes y barras invertidas que alteraban el formato y las rutas. Queda pendiente comprobar la visualización del documento corregido en GitHub.
 - Correcciones relevantes: se eliminaron los símbolos sobrantes, se normalizaron los nombres de archivos y se distinguieron los productos de la preparación inicial de los resultados del análisis todavía pendientes.
+
+## Registro de contribuciones del equipo
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: preparar un registro de las responsabilidades y contribuciones de los cuatro integrantes.
+- Componente del trabajo: CONTRIBUTORS.md.
+- Ejemplos de ayuda obtenida: propuesta de una plantilla con tareas principales, participación en scripts o análisis, revisiones de otros integrantes y fechas de los aportes.
+- Verificación: se contrastaron los campos de la plantilla con la recomendación del apartado 11 del enunciado. Queda pendiente completar los datos del equipo y comprobar la publicación del archivo en GitHub.
+- Correcciones relevantes: no se han identificado correcciones en esta preparación inicial; los datos todavía no confirmados se dejaron pendientes.
