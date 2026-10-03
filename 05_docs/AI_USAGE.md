@@ -39,3 +39,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: interpretación de `git status` y explicación de los comandos `git add`, `git commit` y `git push`.
 - Verificación: después de guardar el contenido localmente, `git status` mostró los tres archivos como modificados. Queda pendiente registrar la comprobación del contenido publicado en GitHub después de subir los cambios.
 - Correcciones relevantes: se corrigió la instrucción de guardado del Bloc de notas, reemplazando Ctrl + S por Ctrl + G, correspondiente a la versión utilizada.
+
+## Corrección del formato del README
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: recuperar un formato Markdown legible y ordenar las instrucciones del proyecto.
+- Componente del trabajo: README.md.
+- Ejemplos de ayuda obtenida: reorganización de las diez secciones, corrección de encabezados y viñetas, y reconstrucción de los bloques de código y las rutas.
+- Verificación: se revisó el texto facilitado y se identificaron símbolos # sobrantes y barras invertidas que alteraban el formato y las rutas. Queda pendiente comprobar la visualización del documento corregido en GitHub.
+- Correcciones relevantes: se eliminaron los símbolos sobrantes, se normalizaron los nombres de archivos y se distinguieron los productos de la preparación inicial de los resultados del análisis todavía pendientes.
