@@ -57,3 +57,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: propuesta de una plantilla con tareas principales, participación en scripts o análisis, revisiones de otros integrantes y fechas de los aportes.
 - Verificación: se contrastaron los campos de la plantilla con la recomendación del apartado 11 del enunciado. Queda pendiente completar los datos del equipo y comprobar la publicación del archivo en GitHub.
 - Correcciones relevantes: no se han identificado correcciones en esta preparación inicial; los datos todavía no confirmados se dejaron pendientes.
+
+## Revisión del cambio en run_all.R
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: identificar el cambio pendiente en el script maestro antes de registrarlo en Git.
+- Componente del trabajo: `02_Rscripts/run_all.R`.
+- Ejemplos de ayuda obtenida: interpretación de la salida de `git diff` y del mensaje “No newline at end of file”.
+- Verificación: la comparación mostró que la única diferencia era la incorporación de un salto de línea al final del archivo. La última instrucción y el resto del código permanecieron iguales.
+- Correcciones relevantes: se conservó el salto de línea final; no fue necesario modificar las instrucciones de R.
