@@ -13,21 +13,21 @@ Este registro se actualizará conforme avance el trabajo. Las contribuciones rea
 - Revisiones del trabajo de otros integrantes: pendientes de registrar.
 - Fechas de los principales aportes: pendientes de completar con las fechas correspondientes.
 
-## Integrante 2 — nombre pendiente
+## Fernanda Ravanal
 
 - Tareas principales: por completar según la asignación acordada.
 - Scripts o análisis en los que participó: pendientes de registrar.
 - Revisiones del trabajo de otros integrantes: pendientes de registrar.
 - Fechas de los principales aportes: pendientes de registrar.
 
-## Integrante 3 — nombre pendiente
+## Alexis Llanquinao
 
 - Tareas principales: por completar según la asignación acordada.
 - Scripts o análisis en los que participó: pendientes de registrar.
 - Revisiones del trabajo de otros integrantes: pendientes de registrar.
 - Fechas de los principales aportes: pendientes de registrar.
 
-## Integrante 4 — nombre pendiente
+## Vicente Rapiman
 
 - Tareas principales: por completar según la asignación acordada.
 - Scripts o análisis en los que participó: pendientes de registrar.

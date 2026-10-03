@@ -8,9 +8,9 @@
 ## 2. Integrantes del equipo
 
 - Ignacio Millán: coordinador.
-- Por completar.
-- Por completar.
-- Por completar.
+- Fernanda Ravanal.
+- Alexis Llanquinao.
+- Vicente Rapiman.
 
 ## 3. Objetivo del TP-01
 
