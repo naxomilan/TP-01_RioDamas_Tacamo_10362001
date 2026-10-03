@@ -25,6 +25,23 @@ Caracterizar la cuenca y analizar sus procesos hidrológicos y su balance hídri
 - `05_docs/`: dossier técnico y registro de uso de inteligencia artificial.
 - `06_config/`: parámetros y archivos de configuración.
 
+### Convención de nombres
+
+- Usar nombres descriptivos, sin espacios, sin tildes y sin caracteres especiales. Separar palabras mediante guiones bajos.
+- Mantener los nombres de las carpetas principales definidos para el proyecto.
+- Numerar los scripts de análisis según sus dependencias y orden de ejecución: primero lectura, después control de calidad, procesamiento y generación de resultados.
+- Cuando un nombre incluya una fecha, utilizar el formato AAAA-MM-DD.
+- Cuando sea necesario para distinguir archivos, incluir la variable, fuente, código de cuenca, resolución temporal o espacial y versión del producto.
+- Utilizar Git para registrar las modificaciones del trabajo. Evitar nombres como final_v2, ahora_si o ultima_version.
+- Al cambiar el nombre de un archivo, actualizar también sus referencias en los scripts, la configuración y la documentación.
+
+Ejemplos orientativos para archivos que se incorporen posteriormente:
+
+- `01_lectura_datos.R`
+- `02_control_calidad.R`
+- `fig_01_mapa_cuenca_10362001.png`
+- `tabla_01_balance_anual_10362001.csv`
+
 ## 5. Fuentes de datos y versiones
 
 Por completar con las fuentes efectivamente utilizadas y sus versiones.

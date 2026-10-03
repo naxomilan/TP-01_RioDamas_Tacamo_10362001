@@ -66,3 +66,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: interpretación de la salida de `git diff` y del mensaje “No newline at end of file”.
 - Verificación: la comparación mostró que la única diferencia era la incorporación de un salto de línea al final del archivo. La última instrucción y el resto del código permanecieron iguales.
 - Correcciones relevantes: se conservó el salto de línea final; no fue necesario modificar las instrucciones de R.
+
+## Convención de nombres del proyecto
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: establecer criterios comunes para nombrar los archivos y facilitar su identificación y trazabilidad.
+- Componente del trabajo: apartado 4 de README.md y organización de futuros archivos del proyecto.
+- Ejemplos de ayuda obtenida: redacción de reglas de nomenclatura, ejemplos de nombres para scripts y resultados, y explicación del orden lógico de numeración de los scripts.
+- Verificación: se contrastaron las reglas propuestas con las indicaciones del enunciado. Queda pendiente comprobar su visualización en GitHub y aplicar estos criterios a los archivos que se incorporen.
+- Correcciones relevantes: se documentó la necesidad de actualizar las referencias cuando cambie un nombre. No se han registrado renombrados de archivos durante este paso.
