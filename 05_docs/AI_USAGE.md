@@ -75,3 +75,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: redacción de reglas de nomenclatura, ejemplos de nombres para scripts y resultados, y explicación del orden lógico de numeración de los scripts.
 - Verificación: se contrastaron las reglas propuestas con las indicaciones del enunciado. Queda pendiente comprobar su visualización en GitHub y aplicar estos criterios a los archivos que se incorporen.
 - Correcciones relevantes: se documentó la necesidad de actualizar las referencias cuando cambie un nombre. No se han registrado renombrados de archivos durante este paso.
+
+## Conservación de carpetas vacías
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: conservar en Git la estructura de carpetas que todavía no contienen datos o resultados.
+- Componente del trabajo: `01_data/raw/`, `01_data/processed/`, `03_outputs/figures/` y `03_outputs/tables/`.
+- Ejemplos de ayuda obtenida: explicación de la función de los archivos `.gitkeep` y comandos de PowerShell para crearlos cuando falten y comprobar su existencia.
+- Verificación: se comprobó mediante PowerShell la presencia de un archivo `.gitkeep` en cada una de las cuatro carpetas. Queda pendiente comprobar su publicación en GitHub.
+- Correcciones relevantes: el procedimiento conserva los marcadores existentes y completa los que falten para mantener la estructura del repositorio.
