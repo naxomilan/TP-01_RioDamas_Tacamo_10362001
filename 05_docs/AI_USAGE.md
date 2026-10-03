@@ -84,3 +84,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: explicación de la función de los archivos `.gitkeep` y comandos de PowerShell para crearlos cuando falten y comprobar su existencia.
 - Verificación: se comprobó mediante PowerShell la presencia de un archivo `.gitkeep` en cada una de las cuatro carpetas. Queda pendiente comprobar su publicación en GitHub.
 - Correcciones relevantes: el procedimiento conserva los marcadores existentes y completa los que falten para mantener la estructura del repositorio.
+
+## Revisión de exclusiones y documentación de datos
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: revisar las exclusiones de Git y establecer cómo documentar los datos que no se incorporen al repositorio.
+- Componente del trabajo: `.gitignore`, apartado 5 de README.md y procedimiento de actualización de `04_metadata/data_sources.csv`.
+- Ejemplos de ayuda obtenida: revisión de las reglas existentes, incorporación de exclusiones para archivos del sistema operativo y redacción del procedimiento para documentar datos excluidos.
+- Verificación: se revisaron las reglas proporcionadas y se consultó la documentación oficial de Git. La comprobación mediante `git check-ignore` no mostró coincidencias para los archivos del proyecto examinados. Queda pendiente comprobar los cambios publicados en GitHub.
+- Correcciones relevantes: se conservaron las reglas existentes, se añadieron las exclusiones de archivos del sistema operativo y se documentó la obligación de registrar la obtención de los datos excluidos.

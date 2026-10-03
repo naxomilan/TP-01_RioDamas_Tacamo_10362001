@@ -48,6 +48,21 @@ Por completar con las fuentes efectivamente utilizadas y sus versiones.
 
 La información detallada de las fuentes se registrará en `04_metadata/data_sources.csv`.
 
+### Datos excluidos del repositorio
+
+Los archivos de datos grandes o con restricciones de redistribución podrán excluirse mediante reglas específicas en `.gitignore`.
+
+Para cada archivo de datos excluido se deberá:
+
+1. Añadir su ruta relativa a `.gitignore`.
+2. Registrar en `04_metadata/data_sources.csv` su fuente, versión, fecha de descarga, enlace de obtención y demás metadatos aplicables.
+3. Documentar en este apartado los pasos necesarios para obtenerlo y la carpeta exacta donde debe colocarse.
+4. Indicar cualquier requisito de acceso o restricción de uso.
+
+Las exclusiones concretas y sus instrucciones de obtención se completarán conforme se seleccionen los datos utilizados.
+
+Los archivos `.gitkeep` se conservarán para mantener la estructura de las carpetas.
+
 ## 6. Requisitos de software
 
 Por completar con los programas utilizados y sus versiones.

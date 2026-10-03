@@ -48,3 +48,8 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Archivos locales del sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
