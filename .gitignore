@@ -53,3 +53,21 @@ rsconnect/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# ==========================================
+# Archivos de datos pesados y temporales TP-01
+# ==========================================
+
+# Excluir datos brutos y procesados
+01_data/raw/*
+01_data/processed/*
+
+# Mantener la estructura de carpetas en GitHub
+!01_data/raw/.gitkeep
+!01_data/processed/.gitkeep
+
+# Excluir hojas de cálculo pesadas de la DGA
+*.xlsx
+*.xls
+01_data/raw/Derechos_Concedidos_X_Region*
+01_data/raw/Inventario_Publico_de_Cuencas*
