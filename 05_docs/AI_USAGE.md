@@ -102,3 +102,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: instrucciones para probar una copia nueva, comprobar la regeneración del registro de R, validar el código CAMELS e interpretar el aviso sobre la última línea del CSV.
 - Verificación: la prueba en la copia nueva terminó correctamente, regeneró `R_sessionInfo.txt` y confirmó el código CAMELS `"10362001"`. Se detectó un aviso por falta de salto de línea al final de `parametros.csv`. Después de corregirlo en el repositorio original, se comprobó la lectura del CSV sin ese aviso. La prueba abarcó la preparación inicial y se realizó en el mismo computador.
 - Correcciones relevantes: se añadió un salto de línea al final de `06_config/parametros.csv`, conservando sus valores.
+
+## Ajuste de las exclusiones de datos
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: permitir incorporar los datos necesarios al repositorio compartido y orientar la publicación del ajuste.
+- Componente del trabajo: .gitignore y procedimiento de actualización mediante Git.
+- Ejemplos de ayuda obtenida: identificación de las reglas que excluían datos originales, procesados y archivos Excel; explicación de git add, git commit y git push.
+- Verificación: git diff confirmó la eliminación local del bloque de exclusiones. Después se creó el commit 687a164 y se confirmó su publicación en la rama ignacio/ajuste-gitignore. Queda pendiente integrar la modificación en main.
+- Correcciones relevantes: se retiraron las exclusiones generales de datos, las de archivos Excel y las dos exclusiones específicas de archivos de la DGA. Se conservaron las reglas de archivos temporales y configuraciones personales. Durante la publicación se detectó que el ajuste seguía sin registrarse en un commit; se corrigió incorporándolo mediante git add, git commit y git push. El equipo revisará posteriormente qué archivos grandes requieren exclusiones específicas.
