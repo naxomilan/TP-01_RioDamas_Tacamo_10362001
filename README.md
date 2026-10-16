@@ -61,6 +61,14 @@ Para cada archivo de datos excluido se deberá:
 
 Las exclusiones concretas y sus instrucciones de obtención se completarán conforme se seleccionen los datos utilizados.
 
+**CR2MET v2.5 (precipitación y temperatura).** Las grillas pesan cerca de 39 GB y no se versionan.
+
+1. Descargar de Zenodo (https://doi.org/10.5281/zenodo.7529682) los archivos `CR2MET_pr_v2.5.zip` y `CR2MET_txn_v2.5.zip`.
+2. Descomprimirlos en `01_data/raw/cr2met_v2.5/pr/` y `01_data/raw/cr2met_v2.5/txn/` (744 archivos `.nc` mensuales en cada una, de 1960-01 a 2021-12).
+3. Correr `run_all.R`: `02_Rscripts/04_preparacion_clima.R` regenera `01_data/processed/clima_CR2METv25_10362001_daily_1960-2021.csv`.
+
+Sin las grillas, el script usa la serie procesada que ya viene en el repositorio. Los md5 de los zip están en `04_metadata/data_sources.csv`.
+
 Los archivos `.gitkeep` se conservarán para mantener la estructura de las carpetas.
 
 ## 6. Requisitos de software
