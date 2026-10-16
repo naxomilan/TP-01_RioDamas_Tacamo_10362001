@@ -54,3 +54,5 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
+# CR2MET v2.5 (~39 GB): no se versiona, ver README seccion 5
+01_data/raw/cr2met_v2.5/
