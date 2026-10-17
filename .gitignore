@@ -114,3 +114,5 @@ desktop.ini
 # Capa geologica preliminar no utilizada en el analisis
 01_data/processed/geologia_base.geojson
 
+# CR2MET v2.5 (~39 GB): no se versiona, ver README seccion 5
+01_data/raw/cr2met_v2.5/
