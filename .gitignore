@@ -103,3 +103,10 @@ desktop.ini
 # Red de drenaje usada durante la calibracion
 01_data/processed/red_drenaje_4km2.*
 01_data/processed/streams_4km2.tif
+
+# Productos auxiliares regenerables de delimitacion
+01_data/processed/cauce_principal.dbf
+01_data/processed/cauce_principal.shp
+01_data/processed/cauce_principal.shx
+01_data/processed/cauce_principal.tif
+01_data/processed/cuenca_rio_damas.tif
