@@ -110,3 +110,7 @@ desktop.ini
 01_data/processed/cauce_principal.shx
 01_data/processed/cauce_principal.tif
 01_data/processed/cuenca_rio_damas.tif
+
+# Capa geologica preliminar no utilizada en el analisis
+01_data/processed/geologia_base.geojson
+
