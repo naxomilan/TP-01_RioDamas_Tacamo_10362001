@@ -4,7 +4,8 @@
 
 # 1. Indicar los scripts en su orden de ejecucion
 scripts_tp <- c(
-  "00_setup.R"
+  "00_setup.R",
+  "04_preparacion_clima.R"
 )
 
 # Agregar aqui los siguientes scripts cuando esten desarrollados.
