@@ -3,3 +3,4 @@ nombre_cuenca,Rio Damas en Tacamo
 codigo_camels,10362001
 ruta_cr2met,01_data/raw/cr2met_v2.5
 poligono_clima,01_data/raw/camels_cl_10362001/polygon/polygon.shp
+pet_referencia,01_data/raw/camels_cl_10362001/pet_hargreaves_day.csv
