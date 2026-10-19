@@ -9,6 +9,7 @@
 % Periodo 1987-2019: acordado por el equipo el 19-oct (periodo_inicio y
 % periodo_fin en 06_config).
 % Fuente del caudal: Alexis lo descargo de la pagina de la DGA (19-oct).
+% Poligono: el de Alexis (cuenca_rio_damas.gpkg), desde el 19-oct.
 
 \section{E02. Calidad y cobertura de la información}
 \label{ev:E02}
@@ -72,9 +73,9 @@ P negativa, Tmin mayor que Tmax, Tmed fuera de [Tmin, Tmax], PET negativa & 1960
 \hline
 Tmax y Tmin diarias & 1987--2019 & 4.0 a 36.9 °C y $-$6.3 a 16.5 °C \\
 \hline
-P diaria máxima & 1987--2019 & 84.7 mm\,día$^{-1}$ (2004-04-02) \\
+P diaria máxima & 1987--2019 & 85.6 mm\,día$^{-1}$ (2004-04-02) \\
 \hline
-PET diaria & 1987--2019 & 0.43 a 7.92 mm\,día$^{-1}$ \\
+PET diaria & 1987--2019 & 0.43 a 7.91 mm\,día$^{-1}$ \\
 \hline
 Q diario & 1987--2019 & 0.021 a 157 m$^3$\,s$^{-1}$, sin valores $\le$\,0 \\
 \hline
@@ -84,13 +85,13 @@ Años calendario con Q completo & 1987--2019 & 22 de 33 \\
 \hline
 Años con 1 a 3 días sin Q (se rellenan) & 1987--2019 & 1992, 2006, 2011 y 2019 (1 o 2 días cada uno) \\
 \hline
-P media anual: los 33 años / 22 con Q completo / 26 con relleno & 1987--2019 & 1588.0 / 1595.2 / 1600.6 mm\,año$^{-1}$ \\
+P media anual: los 33 años / 22 con Q completo / 26 con relleno & 1987--2019 & 1601.6 / 1608.7 / 1614.2 mm\,año$^{-1}$ \\
 \hline
-P de CR2MET v2.5 frente a la de CAMELS-CL \citep{AlvarezGarreton2018} & 1979-01 a 2020-04 & 1620.1 y 1594.1 mm\,año$^{-1}$ (+1.6 \%); $r=$\,0.992 \\
+P de CR2MET v2.5 frente a la de CAMELS-CL \citep{AlvarezGarreton2018} & 1979-01 a 2020-04 & 1633.9 y 1594.1 mm\,año$^{-1}$ (+2.5 \%); $r=$\,0.992 \\
 \hline
-PET calculada frente a la de CAMELS-CL & 1979-01 a 2020-04 & 976.6 y 1013.2 mm\,año$^{-1}$ ($-$3.6 \%); $r=$\,0.994 \\
+PET calculada frente a la de CAMELS-CL & 1979-01 a 2020-04 & 974.3 y 1013.2 mm\,año$^{-1}$ ($-$3.8 \%); $r=$\,0.994 \\
 \hline
-PET media anual calculada & 1987--2019 & 975.6 mm\,año$^{-1}$ \\
+PET media anual calculada & 1987--2019 & 973.4 mm\,año$^{-1}$ \\
 \hline
 PET anual en la lámina 12 de \citet{Correa1997} & registros hasta 1991 & sobre 850 mm\,año$^{-1}$ al oeste, cerca de 800 al este \\
 \hline
@@ -110,11 +111,11 @@ $p$ aproximado: fórmula de \citet{Pettitt1979}.}
 \hline
 Variable & Último año antes del quiebre & $p$ simulación & $p$ aproximado & Media antes & Media después \\
 \hline
-P (mm\,año$^{-1}$) & 1986 & 0.046 & 0.061 & 1745.9 & 1565.4 \\
+P (mm\,año$^{-1}$) & 1986 & 0.043 & 0.059 & 1761.2 & 1578.7 \\
 \hline
-PET (mm\,año$^{-1}$) & 2010 & 0.027 & 0.049 & 963.3 & 999.7 \\
+PET (mm\,año$^{-1}$) & 2010 & 0.026 & 0.047 & 961.1 & 997.4 \\
 \hline
-Tmed (°C) & 1976 & 0.021 & 0.025 & 10.99 & 11.31 \\
+Tmed (°C) & 1976 & 0.020 & 0.025 & 10.97 & 11.30 \\
 \hline
 \end{tabular}
 \end{table}
@@ -131,11 +132,11 @@ calculada con \citet{Hargreaves1985} sobre CR2MET v2.5 y la de CAMELS-CL
 \end{figure}
 
 \campo{3. Fuente y trazabilidad}{Las grillas diarias de CR2MET v2.5 (0.05°,
-WGS84) se promedian sobre el polígono de la cuenca, ponderando cada celda por
+WGS84) se promedian sobre el polígono de la cuenca delimitado en E01, ponderando cada celda por
 la fracción que cae dentro, en \texttt{02\_\allowbreak{}Rscripts/\allowbreak{}04\_\allowbreak{}preparacion\_\allowbreak{}clima.R}.
 El mismo script calcula la PET con la ecuación de \citet{Hargreaves1985} y la
 radiación extraterrestre de \citet{Allen1998}, a la latitud del centroide del
-polígono ($-$40.670°), y hace los controles día a día. La serie queda en
+polígono ($-$40.674°), y hace los controles día a día. La serie queda en
 \texttt{01\_\allowbreak{}data/\allowbreak{}processed/\allowbreak{}clima\_\allowbreak{}CR2METv25\_\allowbreak{}10362001\_\allowbreak{}daily\_\allowbreak{}1960-2021.csv}.
 El caudal es la serie diaria de la DGA procesada por el integrante 2
 (\texttt{01\_\allowbreak{}data/\allowbreak{}processed/\allowbreak{}caudal\_\allowbreak{}diario\_\allowbreak{}dga\_\allowbreak{}10362001.csv}).
@@ -158,26 +159,26 @@ bajo. Por eso se usan años calendario completos: 22 en 1987--2019. El balance
 (E05) usa 26: en los años con 1 a 3 días sin dato, cada día se rellena con el
 promedio de sus dos vecinos, y los años con más faltantes se excluyen. En los dos
 casos el clima del subconjunto casi no se aleja del de los 33 años: la P
-media sube de 1588.0 a 1595.2 o 1600.6 mm\,año$^{-1}$. El período termina en
+media sube de 1601.6 a 1608.7 o 1614.2 mm\,año$^{-1}$. El período termina en
 2019 porque 2020 tiene un 69.4 \% de días con caudal; 2021 está completo y
 podría sumarse.
 
 La prueba de Pettitt responde si la media de cada serie cambia en algún año.
 El cambio más firme es el de Tmed, unos 0.3 °C más desde 1977, con los dos
 valores $p$ bajo 0.05. La P muestra una baja de 10 \% desde 1987, pero solo
-la simulación da $p<$\,0.05 (0.046); la aproximación da 0.061. No es un
+la simulación da $p<$\,0.05 (0.043); la aproximación da 0.059. No es un
 quiebre demostrado. La PET sube en torno a 4 \% desde 2011, dentro del
-período de análisis, con $p$ de 0.027 y 0.049.}
+período de análisis, con $p$ de 0.026 y 0.047.}
 
 \campo{5. Consistencia física}{Los rangos de temperatura y de P diaria son
 plausibles para una cuenca templada lluviosa del sur de Chile. Tmed queda
 siempre entre Tmin y Tmax y el caudal nunca es cero ni negativo. La P de
-CR2MET v2.5 difiere en 1.6 \% de la que trae CAMELS-CL (que no declara qué
-versión de CR2MET usa), y la PET calculada en $-$3.6 \%, con correlaciones
-diarias sobre 0.99. Mes a mes la PET difiere más en invierno, entre $-$7.5 y
-$-$10.1 \% de mayo a agosto, cuando sus valores son menores. El orden de
+CR2MET v2.5 difiere en 2.5 \% de la que trae CAMELS-CL (que no declara qué
+versión de CR2MET usa), y la PET calculada en $-$3.8 \%, con correlaciones
+diarias sobre 0.99. Mes a mes la PET difiere más en invierno, entre $-$7.6 y
+$-$10.2 \% de mayo a agosto, cuando sus valores son menores. El orden de
 magnitud coincide con el estudio nacional: la PET calculada
-(975.6 mm\,año$^{-1}$) supera en 15 \% la isolínea de 850 y en 18 \% a
+(973.4 mm\,año$^{-1}$) supera en 14.5 \% la isolínea de 850 y en 17.6 \% a
 Cañal Bajo Osorno.}
 
 \campo{6. Limitaciones e incertidumbre}{No se contrastó CR2MET con una
