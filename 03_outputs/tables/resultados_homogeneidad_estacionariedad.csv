@@ -1,0 +1,7 @@
+"grupo","test","estadistico","p_value","valor_critico_1pct","valor_critico_5pct","valor_critico_10pct"
+"Homogeneidad","Pettitt",66,0.987345576778261,NA,NA,NA
+"Homogeneidad","Buishand",0.925976226322244,0.7039,NA,NA,NA
+"Homogeneidad","SNHT",4.95843825345988,0.2732,NA,NA,NA
+"Estacionariedad","ADF",-3.14762934773496,0.129217340910514,NA,NA,NA
+"Estacionariedad","KPSS",0.0805477357475601,0.1,NA,NA,NA
+"Estacionariedad","Phillips-Perron",-5.39265040667767,NA,-4.271159375,-3.556230859375,-3.21086484375
