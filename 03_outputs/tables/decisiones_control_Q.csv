@@ -1,0 +1,6 @@
+"aspecto","decision"
+"Duplicados","Sin correccion"
+"Faltantes","Mantener como NA; no interpolar"
+"Valores negativos","No existen"
+"Caudal maximo","157 m3/s el 07-08-2018; conservar"
+"DGA vs CAMELS","DGA principal; CAMELS como contraste"

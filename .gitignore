@@ -56,3 +56,63 @@ desktop.ini
 
 # CR2MET v2.5 (~39 GB): no se versiona, ver README seccion 5
 01_data/raw/cr2met_v2.5/
+# ============================================================
+# Datos grandes y archivos intermedios del TP-01
+# Las fuentes y procedimientos de descarga se documentan
+# en 04_metadata/data_sources.csv y README.md
+# ============================================================
+
+# Datos RAW grandes
+01_data/raw/*
+!01_data/raw/.gitkeep
+
+# Productos intermedios de pruebas de delimitacion
+01_data/processed/acc_*.tif
+01_data/processed/d8_*.tif
+01_data/processed/dem_breach_*.tif
+01_data/processed/dem_acondicionado_d*.tif
+01_data/processed/flow_accumulation_d*.tif
+01_data/processed/cuenca_breach_*.tif
+01_data/processed/cuenca_snap_*.tif
+01_data/processed/cuenca_d*.tif
+01_data/processed/cuenca_prueba_*.tif
+01_data/processed/streams_1km2.tif
+01_data/processed/streams_2km2.tif
+01_data/processed/streams_3km2.tif
+01_data/processed/red_drenaje_1km2.*
+01_data/processed/red_drenaje_2km2.*
+01_data/processed/red_drenaje_3km2.*
+01_data/processed/snap_breach_*.*
+01_data/processed/salida_snap_*.*
+01_data/processed/salida_test.*
+
+# Carpetas extraidas desde fuentes RAW
+01_data/processed/M185/
+01_data/processed/conaf_los_lagos/
+01_data/processed/hidrografia_ide/
+
+# Archivos de sensibilidad del punto de salida
+01_data/processed/salida_dga_d*.*
+01_data/processed/salida_dga_ajustada_d*.*
+
+# Productos auxiliares de comparacion de salidas
+01_data/processed/salida_camels.*
+01_data/processed/salida_camels_ajustada.*
+01_data/processed/salida_dga.*
+01_data/processed/salida_dga_ajustada.*
+01_data/processed/salida_dga_original.*
+
+# Red de drenaje usada durante la calibracion
+01_data/processed/red_drenaje_4km2.*
+01_data/processed/streams_4km2.tif
+
+# Productos auxiliares regenerables de delimitacion
+01_data/processed/cauce_principal.dbf
+01_data/processed/cauce_principal.shp
+01_data/processed/cauce_principal.shx
+01_data/processed/cauce_principal.tif
+01_data/processed/cuenca_rio_damas.tif
+
+# Capa geologica preliminar no utilizada en el analisis
+01_data/processed/geologia_base.geojson
+
