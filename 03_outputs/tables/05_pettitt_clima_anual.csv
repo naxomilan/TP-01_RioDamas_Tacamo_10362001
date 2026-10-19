@@ -1,0 +1,4 @@
+"variable","periodo","n_anios","ultimo_anio_antes_del_quiebre","K","p_monte_carlo","p_aproximado","quiebre_significativo_5pct","media_antes","media_despues"
+"P_mm_anio","1960-2021",62,"1986",375,0.046,0.061,TRUE,1745.9,1565.37
+"PET_mm_anio","1960-2021",62,"2010",387,0.027,0.049,TRUE,963.3,999.67
+"Tmed_degC","1960-2021",62,"1976",420,0.021,0.025,TRUE,10.99,11.31
