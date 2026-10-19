@@ -111,3 +111,30 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: identificación de las reglas que excluían datos originales, procesados y archivos Excel; explicación de git add, git commit y git push.
 - Verificación: git diff confirmó la eliminación local del bloque de exclusiones. Después se creó el commit 687a164 y se confirmó su publicación en la rama ignacio/ajuste-gitignore. Queda pendiente integrar la modificación en main.
 - Correcciones relevantes: se retiraron las exclusiones generales de datos, las de archivos Excel y las dos exclusiones específicas de archivos de la DGA. Se conservaron las reglas de archivos temporales y configuraciones personales. Durante la publicación se detectó que el ajuste seguía sin registrarse en un commit; se corrigió incorporándolo mediante git add, git commit y git push. El equipo revisará posteriormente qué archivos grandes requieren exclusiones específicas.
+
+## Preparación del script de modelación y ubicación de los datos
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: orientar la organización de los datos y el inicio del script de modelación dentro de la rama de trabajo.
+- Componente del trabajo: 01_data/raw/, 02_Rscripts/modelacion_airgr.R y proyecto de RStudio.
+- Ejemplos de ayuda obtenida: explicación de la relación entre carpeta y rama, uso del archivo .Rproj, rutas relativas y código para localizar los archivos de datos.
+- Verificación: queda pendiente comprobar que R utilice la carpeta principal del repositorio y encuentre los archivos copiados. Todavía no se ha verificado la modelación de la cuenca mediante esta asistencia.
+- Correcciones relevantes: se identificaron en el script de ayudantía una ruta absoluta y referencias a otra cuenca, que deberán adaptarse antes de ejecutar el modelo del proyecto.
+
+## Lectura inicial de las series diarias CAMELS-CL
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: preparar la lectura de las series diarias de la cuenca 10362001 para desarrollar la modelación.
+- Componente del trabajo: 02_Rscripts/modelacion_airgr.R y archivos originales de 01_data/raw/camels_cl_10362001/.
+- Ejemplos de ayuda obtenida: código para construir rutas relativas, leer los CSV de Q, P, PET, Tmax y Tmin, y mostrar sus columnas y primeras filas.
+- Verificación: getwd() confirmó que R trabaja desde la raíz del repositorio y list.files() mostró los archivos de la cuenca, incluidos los cinco CSV seleccionados. Queda pendiente comprobar su lectura y revisar columnas, fechas, unidades y cobertura.
+- Correcciones relevantes: se propuso conservar los encabezados originales mediante check.names = FALSE y revisar su contenido antes de seleccionar las columnas para el modelo. El código de lectura no modifica los archivos originales.
+
+## Lectura y revisión inicial de las series diarias CAMELS-CL
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: preparar la lectura de las series diarias de la cuenca 10362001 y revisar su disponibilidad temporal antes de la modelación.
+- Componente del trabajo: 02_Rscripts/modelacion_airgr.R y archivos originales de 01_data/raw/camels_cl_10362001/.
+- Ejemplos de ayuda obtenida: código para leer los CSV conservando sus encabezados, seleccionar la columna de la cuenca y resumir fechas, valores ausentes, fechas repetidas y continuidad del calendario.
+- Verificación: el script se ejecutó sin errores. Q_mm presentó 44368 filas, con 11638 valores disponibles entre 1986-02-01 y 2019-04-22. P, PET, Tmax y Tmin presentaron 15096 valores cada una, sin NA, entre 1979-01-01 y 2020-04-30. En las cinco series se obtuvieron cero fechas repetidas y cero días sin fila dentro del calendario de cada archivo. Quedan pendientes la revisión física de los valores, la comprobación de unidades, la selección del período, la unión de las series y la modelación.
+- Correcciones relevantes: se distinguió entre cantidad de filas y cantidad de observaciones disponibles. Los valores ausentes se conservaron como NA y no se modificaron los archivos originales.
