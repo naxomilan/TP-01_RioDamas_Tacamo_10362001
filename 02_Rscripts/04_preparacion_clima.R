@@ -124,7 +124,7 @@ if (!hay_grillas_tp) {
 }
 
 # 6. PET de Hargreaves-Samani
-# Metodo de la clase de evapotranspiracion (C11, IIO352/IIO422), que lo
+# Metodo de la clase de evapotranspiracion, que lo
 # recomienda cuando los unicos datos disponibles son de temperatura.
 
 # 6.1 Latitud de la cuenca
@@ -135,7 +135,7 @@ latitud_tp      <- crds(centroids(poligono_geo_tp))[1, "y"]
 phi_tp          <- latitud_tp * pi / 180   # rad; latitud sur negativa
 
 # 6.2 Radiacion extraterrestre, Ra [MJ m-2 d-1]
-# [lamina 25/54] Ecuacion 7 (Allen et al., 1998)
+# Ecuacion 7 (Allen et al., 1998)
 J_tp     <- as.integer(format(clima_tp$fecha, "%j"))       # dia juliano
 S0_tp    <- 0.0820                                         # MJ m-2 min-1
 dr_tp    <- 1 + 0.033 * cos(2 * pi * J_tp / 365)
@@ -151,7 +151,7 @@ Ra_MJ_tp <- (24 * 60 / pi) * S0_tp * dr_tp *
 Ra_mm_tp <- 0.408 * Ra_MJ_tp
 
 # 6.3 ETP [mm d-1]
-# [lamina 24/54] Ecuacion 6 (Hargreaves y Samani, 1985)
+# Ecuacion 6 (Hargreaves y Samani, 1985)
 # Supuesto: se aplica sobre las temperaturas ya promediadas en la cuenca.
 clima_tp$PET_mm <- 0.0023 * Ra_mm_tp * (clima_tp$Tmed_degC + 17.78) *
   sqrt(clima_tp$Tmax_degC - clima_tp$Tmin_degC)
@@ -296,7 +296,7 @@ if (!is.null(pet_referencia_tp) && file.exists(pet_referencia_tp)) {
   axis(1, at = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun",
                                 "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
   legend("top", bty = "n",
-         legend = c("Calculada con CR2MET v2.5", "CAMELS-CL (pet_hargreaves)"),
+         legend = c("Calculada con CR2MET v2.5", "CAMELS-CL"),
          pch = c(19, 1), lty = c(1, 2))
   dev.off()
 
