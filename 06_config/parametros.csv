@@ -4,3 +4,7 @@ codigo_camels,10362001
 ruta_cr2met,01_data/raw/cr2met_v2.5
 poligono_clima,01_data/raw/camels_cl_10362001/polygon/polygon.shp
 pet_referencia,01_data/raw/camels_cl_10362001/pet_hargreaves_day.csv
+serie_caudal,01_data/processed/caudal_diario_dga_10362001.csv
+p_referencia,01_data/raw/camels_cl_10362001/precip_cr2met_day.csv
+periodo_inicio,1987
+periodo_fin,2019
