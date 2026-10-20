@@ -4,10 +4,30 @@
 camels <- read.csv(unz("01_data/raw/camels_cl_10362001.zip","q_m3s_day.csv"))
 camels$date <- as.Date(camels$date)
 
-dga <- read.csv(unz("01_data/raw/caudal_diario_historico_dga_los_lagos.zip",
-                    "caudal_diario_historico_10.txt"))
-dga <- dga[dga$CODIGO.ESTACION==10362001,]
-dga$FECHA <- as.Date(dga$FECHA,"%d/%m/%Y")
+# Conservar la base regional para disponer de estaciones donantes.
+base <- read.csv(
+  unz(
+    "01_data/raw/caudal_diario_historico_dga_los_lagos.zip",
+    "caudal_diario_historico_10.txt"
+  ),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  all(c("CODIGO.ESTACION", "FECHA", "Caudal_diario") %in% names(base))
+)
+
+base$FECHA <- as.Date(base$FECHA, format = "%d/%m/%Y")
+
+if (
+  anyNA(base$FECHA) ||
+  anyDuplicated(base[, c("CODIGO.ESTACION", "FECHA")]) > 0
+) {
+  stop("Revisa fechas invalidas o repetidas por estacion en la base DGA.")
+}
+
+# Seleccionar Rio Damas para el control de calidad.
+dga <- base[base$CODIGO.ESTACION == 10362001, ]
 
 # Serie continua: dias sin registro quedan como NA
 q <- data.frame(FECHA=seq(min(dga$FECHA),max(dga$FECHA),by="day"))
