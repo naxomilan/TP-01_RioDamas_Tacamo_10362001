@@ -20,10 +20,15 @@
 #          03_outputs/figures/05_cobertura_caudal.png         (si hay caudal)
 #          03_outputs/figures/05_evolucion_anual.png
 #          03_outputs/tables/05_pettitt_clima_anual.csv
+#          03_outputs/tables/05_estacionariedad_clima_anual.csv
 #          03_outputs/tables/05_indice_aridez.csv
 #          03_outputs/figures/05_mapas_P_T_media_anual.png  (solo con las grillas)
 #          03_outputs/tables/05_mapas_rango_en_cuenca.csv   (solo con las grillas)
 #          03_outputs/tables/05_resumen_calidad_E02.csv
+#          03_outputs/tables/05_resumen_regimen_E03.csv, 05_estadisticos_anuales_E04.csv,
+#          05_anios_extremos_E04.csv, 05_relaciones_anuales_E04.csv y 05_relleno_por_anio_E04.csv
+#          01_data/processed/koppen_1991_2020_<codigo>.tif (recorte, si esta el mapa)
+#          03_outputs/tables/05_koppen_cuenca.csv y 03_outputs/figures/05_mapa_koppen.png
 #
 # Agregacion: P y PET se SUMAN (mm/mes, mm/anio); Tmax, Tmin y Tmed se
 # PROMEDIAN (degC). Un mes o un anio solo se calcula si tiene todos sus dias:
@@ -164,7 +169,7 @@ lines(centros_tp, temperaturas_tp$Tmed_degC, type = "b", pch = 19, col = "black"
 lines(centros_tp, temperaturas_tp$Tmin_degC, type = "b", pch = 25, col = "royalblue",
       bg = "royalblue")
 axis(4)
-mtext("Temperatura media (degC)", side = 4, line = 3)
+mtext("Temperatura media mensual (°C)", side = 4, line = 3)
 
 legend("top", horiz = TRUE, bty = "n", cex = 0.85,
        legend = c("P", "Tmax", "Tmed", "Tmin"),
@@ -200,14 +205,24 @@ if (is.null(serie_caudal_tp) || !file.exists(serie_caudal_tp)) {
   # 6.1 Leer el caudal y llevarlo a lamina
   # Las columnas de fecha y caudal se leen de la configuracion; si no estan,
   # se usan la primera y la segunda columna del archivo.
-  caudal_tp <- read.csv(serie_caudal_tp)
-  col_fecha_tp <- if (is.null(config_tp$caudal_col_fecha)) names(caudal_tp)[1] else config_tp$caudal_col_fecha
-  col_valor_tp <- if (is.null(config_tp$caudal_col_valor)) names(caudal_tp)[2] else config_tp$caudal_col_valor
+  # Si la serie viene rellenada, caudal_col_valor es la columna completa (la
+  # que se usa para el regimen y los totales) y caudal_col_observado la
+  # original con NA, que es la que sirve para contar los faltantes.
+  # caudal_col_metodo, si esta, dice con que metodo se relleno cada dia.
+  caudal_crudo_tp <- read.csv(serie_caudal_tp)
+  col_fecha_tp <- if (is.null(config_tp$caudal_col_fecha)) names(caudal_crudo_tp)[1] else config_tp$caudal_col_fecha
+  col_valor_tp <- if (is.null(config_tp$caudal_col_valor)) names(caudal_crudo_tp)[2] else config_tp$caudal_col_valor
+  col_obs_tp    <- config_tp$caudal_col_observado
+  col_metodo_tp <- config_tp$caudal_col_metodo
 
   caudal_tp <- data.frame(
-    fecha = as.Date(caudal_tp[[col_fecha_tp]]),
-    Q_m3s = as.numeric(caudal_tp[[col_valor_tp]])
+    fecha = as.Date(caudal_crudo_tp[[col_fecha_tp]]),
+    Q_m3s = as.numeric(caudal_crudo_tp[[col_valor_tp]])
   )
+  caudal_tp$Q_obs_m3s <- if (is.null(col_obs_tp)) caudal_tp$Q_m3s else
+    as.numeric(caudal_crudo_tp[[col_obs_tp]])
+  caudal_tp$metodo <- if (is.null(col_metodo_tp)) NA_character_ else
+    as.character(caudal_crudo_tp[[col_metodo_tp]])
   stopifnot(!anyDuplicated(caudal_tp$fecha))
 
   # Se completa el calendario desde el 1 de enero del primer anio hasta el 31
@@ -265,13 +280,13 @@ if (is.null(serie_caudal_tp) || !file.exists(serie_caudal_tp)) {
                           col = "lightsteelblue", border = "steelblue4",
                           ylim = c(0, max(regimen_tp[, c("P_mm_mes", "PET_mm_mes", "Q_mm_mes")],
                                           na.rm = TRUE) * 1.15),
-                          ylab = "Lamina media (mm/mes)", xlab = "Mes",
+                          ylab = "Lámina media (mm/mes)", xlab = "Mes",
                           main = paste0("Regimen mensual de P, PET y Q, cuenca ", codigo_tp,
                                         " (", inicio_tp, "-", fin_tp, ")"))
   lines(centros_q_tp, regimen_tp$PET_mm_mes, type = "b", pch = 17, col = "darkorange3")
   lines(centros_q_tp, regimen_tp$Q_mm_mes, type = "b", pch = 19, col = "navy", lwd = 2)
   legend("topright", bty = "n", cex = 0.85,
-         legend = c("P (CR2MET v2.5)", "PET (Hargreaves-Samani)", "Q (meses completos)"),
+         legend = c("P (CR2MET v2.5)", "PET (Hargreaves-Samani)", "Q (serie usada)"),
          fill = c("lightsteelblue", NA, NA), border = c("steelblue4", NA, NA),
          pch = c(NA, 17, 19), lty = c(NA, 1, 1), lwd = c(NA, 1, 2),
          col = c(NA, "darkorange3", "navy"))
@@ -282,21 +297,23 @@ if (is.null(serie_caudal_tp) || !file.exists(serie_caudal_tp)) {
 
   message("05: regimen P-PET-Q escrito; area usada para Q: ", round(area_km2_tp, 2), " km2")
 
-  # 6.4 Figura de faltantes del caudal
-  # Izquierda: cobertura de cada anio del registro (gris = anio incompleto).
+  # 6.4 Figura de faltantes del caudal OBSERVADO (antes de cualquier relleno)
+  # Izquierda: cobertura de cada anio (gris = anio incompleto).
   # Derecha: dias sin dato por mes del anio, dentro del periodo de analisis.
-  cobertura_q_tp <- caudal_anual_tp$cobertura_Q_mm_pct
-  en_periodo_q_tp <- format(caudal_tp$fecha, "%Y") %in% as.character(inicio_tp:fin_tp)
-  faltan_mes_tp <- tapply(is.na(caudal_tp$Q_m3s[en_periodo_q_tp]),
+  anio_dia_q_tp  <- format(caudal_tp$fecha, "%Y")
+  # El calendario ya esta completo (6.1), asi que la media de !is.na es la cobertura.
+  cobertura_q_tp <- round(100 * tapply(!is.na(caudal_tp$Q_obs_m3s), anio_dia_q_tp, mean), 1)
+  en_periodo_q_tp <- anio_dia_q_tp %in% as.character(inicio_tp:fin_tp)
+  faltan_mes_tp <- tapply(is.na(caudal_tp$Q_obs_m3s[en_periodo_q_tp]),
                           factor(as.integer(format(caudal_tp$fecha[en_periodo_q_tp], "%m")), levels = 1:12),
                           sum)
 
   png("03_outputs/figures/05_cobertura_caudal.png", width = 2000, height = 900, res = 200)
   par(mfrow = c(1, 2), mar = c(4.5, 4.5, 3.5, 1))
-  barplot(cobertura_q_tp, names.arg = caudal_anual_tp$anio, las = 2, cex.names = 0.6,
+  barplot(as.numeric(cobertura_q_tp), names.arg = names(cobertura_q_tp), las = 2, cex.names = 0.6,
           col = ifelse(cobertura_q_tp == 100, "steelblue4", "grey70"), border = NA,
           ylim = c(0, 105), ylab = "Dias con dato (%)",
-          main = "Cobertura anual del caudal")
+          main = "Cobertura anual del caudal observado")
   abline(h = 100, lty = 3)
   barplot(as.numeric(faltan_mes_tp), names.arg = nombres_mes_tp, las = 2,
           col = "grey40", border = NA, ylab = "Dias sin dato",
@@ -317,24 +334,37 @@ if (!is.null(caudal_anual_tp)) {
 }
 
 anio_ev_tp <- as.integer(evolucion_tp$anio)
-png("03_outputs/figures/05_evolucion_anual.png", width = 1800, height = 1000, res = 200)
-par(mar = c(4.5, 4.5, 3.5, 2))
+# Arriba: P, PET y Q en lamina. Abajo: Tmax, Tmed y Tmin anuales.
+png("03_outputs/figures/05_evolucion_anual.png", width = 1800, height = 1600, res = 200)
+par(mfrow = c(2, 1), mar = c(4, 4.5, 3, 2))
 plot(anio_ev_tp, evolucion_tp$P_mm_anio, type = "b", pch = 19, cex = 0.6,
      col = "steelblue4", ylim = c(0, max(evolucion_tp$P_mm_anio) * 1.1),
-     xlab = "Anio", ylab = "Lamina anual (mm/anio)",
-     main = paste0("Evolucion anual, cuenca ", codigo_tp))
+     xlab = "Año", ylab = "Lámina anual (mm/año)",
+     main = paste0("Evolución anual, cuenca ", codigo_tp))
 lines(anio_ev_tp, evolucion_tp$PET_mm_anio, type = "b", pch = 17, cex = 0.6, col = "darkorange3")
 if (!is.null(caudal_anual_tp)) {
   lines(anio_ev_tp, evolucion_tp$Q_mm_anio, type = "b", pch = 15, cex = 0.6, col = "navy")
 }
 abline(v = c(inicio_tp, fin_tp), lty = 3, col = "grey40")
 legend("bottomleft", bty = "n", cex = 0.8, horiz = TRUE,
-       legend = c("P", "PET", if (!is.null(caudal_anual_tp)) "Q (anios completos)"),
+       legend = c("P", "PET", if (!is.null(caudal_anual_tp)) "Q (años completos)"),
        pch = c(19, 17, if (!is.null(caudal_anual_tp)) 15),
        col = c("steelblue4", "darkorange3", if (!is.null(caudal_anual_tp)) "navy"))
+anio_t_tp <- as.integer(anual_tp$anio)
+plot(anio_t_tp, anual_tp$Tmax_degC, type = "b", pch = 17, cex = 0.6, col = "firebrick",
+     ylim = range(c(anual_tp$Tmin_degC, anual_tp$Tmax_degC)) + c(-1, 1),
+     xlab = "Año", ylab = "Temperatura media anual (°C)")
+lines(anio_t_tp, anual_tp$Tmed_degC, type = "b", pch = 19, cex = 0.6, col = "black")
+lines(anio_t_tp, anual_tp$Tmin_degC, type = "b", pch = 25, cex = 0.6, col = "royalblue",
+      bg = "royalblue")
+abline(v = c(inicio_tp, fin_tp), lty = 3, col = "grey40")
+legend("bottomleft", bty = "n", cex = 0.8, horiz = TRUE,
+       legend = c("Tmax", "Tmed", "Tmin"), pch = c(17, 19, 25),
+       col = c("firebrick", "black", "royalblue"), pt.bg = c(NA, NA, "royalblue"))
 dev.off()
 
-# 7. Homogeneidad de las series anuales del clima (prueba de Pettitt)
+# 7. Homogeneidad y estacionariedad de las series anuales del clima
+# 7.1 Prueba de Pettitt
 # [CP05, paso 3] Funciones copiadas sin cambios.
 # 3. Pettitt's K, split after year t, and exchangeability-based null simulation.
 pettitt_stat <- function(x) {
@@ -354,30 +384,75 @@ pettitt_permutation <- function(x, B = 999L) {
     p_monte_carlo = (1 + sum(null_K >= observed$K)) / (B + 1))
 }
 
-# +) Se aplica a P, PET y Tmed anuales de todo el registro (continuas, sin NA).
-#    El caudal no se prueba aqui: su serie anual tiene anios incompletos y la
-#    funcion de la CP05 no acepta NA.
+# +) Se aplica a P, PET y Tmed anuales (continuas, sin NA) en dos tramos:
+#    el registro completo, para ver la historia larga, y el periodo de
+#    analisis, que es el que usan el balance y Budyko. Budyko pide que P y T
+#    anuales sean homogeneas y estacionarias en ese periodo (clase 19-oct).
+#    El caudal no se prueba aqui: lo prueba el script de control de Q.
+variables_prueba_tp <- c("P_mm_anio", "PET_mm_anio", "Tmed_degC")
+tramos_tp <- list(
+  registro = as.integer(anual_tp$anio),
+  periodo  = inicio_tp:fin_tp
+)
+
 set.seed(20260924)
-pettitt_tp <- do.call(rbind, lapply(c("P_mm_anio", "PET_mm_anio", "Tmed_degC"), function(v) {
-  x <- anual_tp[[v]]
-  r <- pettitt_permutation(x)
-  corte <- r[["split_after"]]
-  data.frame(
-    variable = v,
-    periodo = paste0(anual_tp$anio[1], "-", anual_tp$anio[nrow(anual_tp)]),
-    n_anios = length(x),
-    ultimo_anio_antes_del_quiebre = anual_tp$anio[corte],
-    K = r[["K"]],
-    p_monte_carlo = r[["p_monte_carlo"]],
-    # +) Aproximacion de Pettitt (1979): p ~ 2 exp(-6 K^2 / (n^3 + n^2)).
-    #    No depende de la semilla; sirve para ver si el p de la simulacion es estable.
-    p_aproximado = round(2 * exp(-6 * r[["K"]]^2 / (length(x)^3 + length(x)^2)), 3),
-    quiebre_significativo_5pct = r[["p_monte_carlo"]] < 0.05,
-    media_antes = round(mean(x[seq_len(corte)]), 2),
-    media_despues = round(mean(x[-seq_len(corte)]), 2)
-  )
+pettitt_tp <- do.call(rbind, lapply(names(tramos_tp), function(tramo) {
+  datos_tramo <- anual_tp[as.integer(anual_tp$anio) %in% tramos_tp[[tramo]], ]
+  do.call(rbind, lapply(variables_prueba_tp, function(v) {
+    x <- datos_tramo[[v]]
+    r <- pettitt_permutation(x)
+    corte <- r[["split_after"]]
+    data.frame(
+      variable = v,
+      tramo = tramo,
+      periodo = paste0(datos_tramo$anio[1], "-", datos_tramo$anio[nrow(datos_tramo)]),
+      n_anios = length(x),
+      ultimo_anio_antes_del_quiebre = datos_tramo$anio[corte],
+      K = r[["K"]],
+      p_monte_carlo = r[["p_monte_carlo"]],
+      # +) Aproximacion de Pettitt (1979): p ~ 2 exp(-6 K^2 / (n^3 + n^2)).
+      #    Es una aproximacion asintotica, solo de referencia: la prueba del
+      #    curso es la simulacion por permutaciones.
+      #    Se acota a 1: con quiebres debiles la formula da valores mayores.
+      p_aproximado = round(min(1, 2 * exp(-6 * r[["K"]]^2 / (length(x)^3 + length(x)^2))), 3),
+      quiebre_significativo_5pct = r[["p_monte_carlo"]] < 0.05,
+      media_antes = round(mean(x[seq_len(corte)]), 2),
+      media_despues = round(mean(x[-seq_len(corte)]), 2)
+    )
+  }))
 }))
 write.csv(pettitt_tp, "03_outputs/tables/05_pettitt_clima_anual.csv", row.names = FALSE)
+
+# 7.2 Estacionariedad en el periodo de analisis (ADF y KPSS)
+# [CP05, paso 4] Las mismas llamadas de la clase practica:
+#   ADF:  hipotesis nula = raiz unitaria (NO estacionaria). p < 0.05 la rechaza.
+#   KPSS: hipotesis nula = estacionaria en nivel. p < 0.05 la rechaza.
+# +) tseries acota el p del KPSS entre 0.01 y 0.1 y el del ADF entre 0.01 y
+#    0.99 (avisa con un warning, que aqui se silencia): un p = 0.1 en KPSS
+#    significa "0.1 o mas".
+if (!requireNamespace("tseries", quietly = TRUE)) {
+  message("05: falta el paquete tseries; se omiten ADF y KPSS")
+} else {
+  datos_periodo_tp <- anual_tp[as.integer(anual_tp$anio) %in% (inicio_tp:fin_tp), ]
+  estacionariedad_tp <- do.call(rbind, lapply(variables_prueba_tp, function(v) {
+    x <- datos_periodo_tp[[v]]
+    adf  <- suppressWarnings(tseries::adf.test(x, k = 4))
+    kpss <- suppressWarnings(tseries::kpss.test(x, null = "Level", lshort = TRUE))
+    data.frame(
+      variable = v,
+      periodo = paste0(inicio_tp, "-", fin_tp),
+      n_anios = length(x),
+      adf_estadistico = round(unname(adf$statistic), 3),
+      adf_p = round(adf$p.value, 3),
+      kpss_estadistico = round(unname(kpss$statistic), 3),
+      kpss_p = round(kpss$p.value, 3),
+      estacionaria_segun_kpss = kpss$p.value >= 0.05,
+      estacionaria_segun_adf = adf$p.value < 0.05
+    )
+  }))
+  write.csv(estacionariedad_tp, "03_outputs/tables/05_estacionariedad_clima_anual.csv",
+            row.names = FALSE)
+}
 
 # 8. Indice de aridez del periodo de analisis
 # Se entregan los dos cocientes, porque son inversos y la definicion se acuerda
@@ -451,10 +526,10 @@ if (length(archivos_pr_tp) == 0 || length(archivos_txn_tp) == 0) {
   png("03_outputs/figures/05_mapas_P_T_media_anual.png", width = 2000, height = 950, res = 200)
   par(mfrow = c(1, 2), mar = c(3, 3, 3, 5))
   plot(P_mapa_tp, col = hcl.colors(20, "Blues 3", rev = TRUE),
-       main = paste0("P media anual (mm/anio), ", inicio_tp, "-", fin_tp))
+       main = paste0("P media anual (mm/año), ", inicio_tp, "-", fin_tp))
   lines(cuenca_mapa_tp, lwd = 2)
   plot(T_mapa_tp, col = hcl.colors(20, "YlOrRd", rev = TRUE),
-       main = paste0("T media anual (degC), ", inicio_tp, "-", fin_tp))
+       main = paste0("Tmed anual (°C), ", inicio_tp, "-", fin_tp))
   lines(cuenca_mapa_tp, lwd = 2)
   mtext("CR2MET v2.5, grilla de 0.05 grados; linea negra: limite de la cuenca",
         side = 1, line = 1.8, adj = 1, cex = 0.7)
@@ -532,29 +607,182 @@ agregar_fila_tp("P media anual, todos los anios (mm/anio)", round(mean(P_anual_p
 
 if (!is.null(caudal_anual_tp)) {
   q_en_periodo_tp <- caudal_tp[format(caudal_tp$fecha, "%Y") %in% as.character(inicio_tp:fin_tp), ]
-  falta_tp <- is.na(q_en_periodo_tp$Q_m3s)
+  # Faltantes: siempre sobre el caudal observado
+  falta_tp <- is.na(q_en_periodo_tp$Q_obs_m3s)
   mes_falta_tp <- as.integer(format(q_en_periodo_tp$fecha[falta_tp], "%m"))
-
   dias_faltan_anio_tp <- tapply(falta_tp, format(q_en_periodo_tp$fecha, "%Y"), sum)
-  completos_tp <- names(dias_faltan_anio_tp)[dias_faltan_anio_tp == 0]
-  casi_tp      <- names(dias_faltan_anio_tp)[dias_faltan_anio_tp %in% 1:2]
 
-  q_obs_tp <- caudal_tp[!is.na(caudal_tp$Q_m3s), ]
-  agregar_fila_tp("Registro de caudal", paste(format(range(q_obs_tp$fecha)), collapse = " a "), "registro")
+  q_obs_tp <- q_en_periodo_tp[!is.na(q_en_periodo_tp$Q_obs_m3s), ]
   agregar_fila_tp("Dias en el periodo", nrow(q_en_periodo_tp), periodo_txt_tp)
-  agregar_fila_tp("Dias sin caudal", sum(falta_tp), periodo_txt_tp)
-  agregar_fila_tp("Cobertura del caudal (%)", round(100 * mean(!falta_tp), 2), periodo_txt_tp)
-  agregar_fila_tp("Dias sin caudal en junio, julio y agosto", sum(mes_falta_tp %in% 6:8), periodo_txt_tp)
-  agregar_fila_tp("Q diario minimo y maximo (m3/s)",
-                  paste(range(q_en_periodo_tp$Q_m3s, na.rm = TRUE), collapse = " a "), periodo_txt_tp)
-  agregar_fila_tp("Dias con Q <= 0", sum(q_en_periodo_tp$Q_m3s <= 0, na.rm = TRUE), periodo_txt_tp)
-  agregar_fila_tp("Anios con Q completo", length(completos_tp), periodo_txt_tp)
-  agregar_fila_tp("Anios con 1 o 2 dias sin Q", paste(casi_tp, collapse = " "), periodo_txt_tp)
-  agregar_fila_tp("P media anual, anios con Q completo (mm/anio)",
-                  round(mean(P_anual_periodo_tp[completos_tp]), 1), periodo_txt_tp)
-  agregar_fila_tp("P media anual, anios con Q completo o con 1-2 dias sin Q (mm/anio)",
-                  round(mean(P_anual_periodo_tp[c(completos_tp, casi_tp)]), 1), periodo_txt_tp)
+  agregar_fila_tp("Dias sin caudal observado", sum(falta_tp), periodo_txt_tp)
+  agregar_fila_tp("Cobertura del caudal observado (%)", round(100 * mean(!falta_tp), 2), periodo_txt_tp)
+  agregar_fila_tp("Dias sin caudal observado en junio, julio y agosto", sum(mes_falta_tp %in% 6:8), periodo_txt_tp)
+  agregar_fila_tp("Q observado diario minimo y maximo (m3/s)",
+                  paste(range(q_obs_tp$Q_obs_m3s), collapse = " a "), periodo_txt_tp)
+  agregar_fila_tp("Anios con Q observado completo", sum(dias_faltan_anio_tp == 0), periodo_txt_tp)
+
+  # Serie que se usa (completada, si viene rellenada)
+  dias_sin_q_usado_tp <- tapply(is.na(q_en_periodo_tp$Q_m3s), format(q_en_periodo_tp$fecha, "%Y"), sum)
+  agregar_fila_tp("Anios con Q completo en la serie usada", sum(dias_sin_q_usado_tp == 0), periodo_txt_tp)
+  agregar_fila_tp("Dias con Q usado <= 0", sum(q_en_periodo_tp$Q_m3s <= 0, na.rm = TRUE), periodo_txt_tp)
+  if (any(q_en_periodo_tp$Q_m3s <= 0, na.rm = TRUE)) {
+    agregar_fila_tp("Fechas con Q usado <= 0",
+                    paste(format(range(q_en_periodo_tp$fecha[which(q_en_periodo_tp$Q_m3s <= 0)])), collapse = " a "),
+                    periodo_txt_tp)
+  }
+  rellenados_tp <- q_en_periodo_tp[falta_tp & !is.na(q_en_periodo_tp$Q_m3s), ]
+  if (nrow(rellenados_tp) > 0 && !all(is.na(rellenados_tp$metodo))) {
+    for (m in sort(unique(rellenados_tp$metodo))) {
+      agregar_fila_tp(paste0("Dias rellenados con ", m), sum(rellenados_tp$metodo == m), periodo_txt_tp)
+    }
+  }
 }
 
 write.csv(resumen_tp, "03_outputs/tables/05_resumen_calidad_E02.csv", row.names = FALSE)
 message("05: resumen de calidad escrito en 03_outputs/tables/05_resumen_calidad_E02.csv")
+
+# 11. Cifras del regimen (E03) y de la evolucion anual (E04)
+# Tablas con los numeros que citan las fichas E03 y E04, para que cada uno
+# salga de run_all.R.
+
+# 11.1 Regimen mensual del periodo
+regimen_e03_tp <- data.frame(indicador = character(0), valor = character(0))
+fila_e03_tp <- function(indicador, valor) {
+  regimen_e03_tp <<- rbind(regimen_e03_tp, data.frame(indicador = indicador, valor = as.character(valor)))
+}
+cl_tp <- climatologia_tp
+fila_e03_tp("Periodo", periodo_txt_tp)
+fila_e03_tp("Mes de P maxima", nombres_mes_tp[which.max(cl_tp$P_mm_mes)])
+fila_e03_tp("Mes de P minima", nombres_mes_tp[which.min(cl_tp$P_mm_mes)])
+fila_e03_tp("P de mayo a agosto (% del anio)", round(100 * sum(cl_tp$P_mm_mes[5:8]) / sum(cl_tp$P_mm_mes), 1))
+fila_e03_tp("Meses con PET mayor que P", paste(nombres_mes_tp[cl_tp$PET_mm_mes > cl_tp$P_mm_mes], collapse = " "))
+fila_e03_tp("Mes mas frio (Tmed, degC)", paste(nombres_mes_tp[which.min(cl_tp$Tmed_degC)], round(min(cl_tp$Tmed_degC), 2)))
+fila_e03_tp("Mes mas calido (Tmed, degC)", paste(nombres_mes_tp[which.max(cl_tp$Tmed_degC)], round(max(cl_tp$Tmed_degC), 2)))
+if (exists("regimen_tp") && !is.null(caudal_anual_tp)) {
+  fila_e03_tp("Mes de Q maximo", nombres_mes_tp[which.max(regimen_tp$Q_mm_mes)])
+  fila_e03_tp("Mes de Q minimo", nombres_mes_tp[which.min(regimen_tp$Q_mm_mes)])
+  fila_e03_tp("Q de mayo a agosto (% del anio)", round(100 * sum(regimen_tp$Q_mm_mes[5:8]) / sum(regimen_tp$Q_mm_mes), 1))
+  fila_e03_tp("Cociente Q maximo / Q minimo mensual", round(max(regimen_tp$Q_mm_mes) / min(regimen_tp$Q_mm_mes), 1))
+  fila_e03_tp("Q/P mensual minimo y maximo", paste(range(regimen_tp$Q_sobre_P), collapse = " a "))
+}
+write.csv(regimen_e03_tp, "03_outputs/tables/05_resumen_regimen_E03.csv", row.names = FALSE)
+
+# 11.2 Estadisticos anuales del periodo (solo anios con todas las variables)
+anual_e04_tp <- merge(evolucion_tp, anual_tp[, c("anio", "Tmax_degC", "Tmin_degC")], by = "anio")
+anual_e04_tp <- anual_e04_tp[as.integer(anual_e04_tp$anio) %in% (inicio_tp:fin_tp), ]
+variables_e04_tp <- intersect(c("P_mm_anio", "PET_mm_anio", "Q_mm_anio", "Q_m3s_medio",
+                                "Tmax_degC", "Tmed_degC", "Tmin_degC", "Q_sobre_P"),
+                              names(anual_e04_tp))
+estadisticos_tp <- do.call(rbind, lapply(variables_e04_tp, function(v) {
+  x <- anual_e04_tp[[v]]
+  ok <- !is.na(x)
+  data.frame(
+    variable = v, n_anios = sum(ok),
+    media = round(mean(x[ok]), 2), desviacion = round(sd(x[ok]), 2),
+    cv_pct = round(100 * sd(x[ok]) / mean(x[ok]), 1),
+    minimo = round(min(x[ok]), 2), anio_minimo = anual_e04_tp$anio[ok][which.min(x[ok])],
+    maximo = round(max(x[ok]), 2), anio_maximo = anual_e04_tp$anio[ok][which.max(x[ok])]
+  )
+}))
+write.csv(estadisticos_tp, "03_outputs/tables/05_estadisticos_anuales_E04.csv", row.names = FALSE)
+
+# 11.3 Anios mas secos y mas humedos segun P, y relaciones entre variables
+orden_p_tp <- anual_e04_tp[order(anual_e04_tp$P_mm_anio), ]
+extremos_tp <- rbind(head(orden_p_tp, 3), tail(orden_p_tp, 3))
+extremos_tp$tipo <- rep(c("seco", "humedo"), each = 3)
+columnas_ext_tp <- intersect(c("tipo", "anio", "P_mm_anio", "PET_mm_anio", "Q_mm_anio", "Q_sobre_P"), names(extremos_tp))
+write.csv(extremos_tp[, columnas_ext_tp], "03_outputs/tables/05_anios_extremos_E04.csv", row.names = FALSE)
+
+relaciones_tp <- data.frame(indicador = c("Correlacion P-PET anual", "Correlacion PET-Tmed anual"),
+                            valor = c(round(cor(anual_e04_tp$P_mm_anio, anual_e04_tp$PET_mm_anio), 3),
+                                      round(cor(anual_e04_tp$PET_mm_anio, anual_e04_tp$Tmed_degC), 3)))
+if ("Q_mm_anio" %in% names(anual_e04_tp) && all(!is.na(anual_e04_tp$Q_mm_anio))) {
+  relaciones_tp <- rbind(relaciones_tp, data.frame(
+    indicador = c("Correlacion P-Q anual",
+                  "P - Q medio (mm/anio)",
+                  "PET media (mm/anio)",
+                  "(P - Q) / PET"),
+    valor = c(round(cor(anual_e04_tp$P_mm_anio, anual_e04_tp$Q_mm_anio), 3),
+              round(mean(anual_e04_tp$P_mm_anio - anual_e04_tp$Q_mm_anio), 1),
+              round(mean(anual_e04_tp$PET_mm_anio), 1),
+              round(mean(anual_e04_tp$P_mm_anio - anual_e04_tp$Q_mm_anio) / mean(anual_e04_tp$PET_mm_anio), 3))
+  ))
+}
+write.csv(relaciones_tp, "03_outputs/tables/05_relaciones_anuales_E04.csv", row.names = FALSE)
+message("05: cifras de E03 y E04 escritas en 03_outputs/tables/05_*_E03.csv y 05_*_E04.csv")
+
+# 11.4 Peso del relleno en el caudal anual (si la serie trae el metodo)
+# Para cada anio: dias rellenados y que parte del volumen anual sale de ellos.
+if (!is.null(caudal_anual_tp) && exists("caudal_tp") && !all(is.na(caudal_tp$metodo))) {
+  en_per_tp <- caudal_tp[format(caudal_tp$fecha, "%Y") %in% as.character(inicio_tp:fin_tp), ]
+  relleno_dia_tp <- is.na(en_per_tp$Q_obs_m3s) & !is.na(en_per_tp$Q_m3s)
+  anio_rel_tp <- format(en_per_tp$fecha, "%Y")
+  relleno_anio_tp <- data.frame(
+    anio = sort(unique(anio_rel_tp)),
+    dias_rellenados = as.integer(tapply(relleno_dia_tp, anio_rel_tp, sum)),
+    pct_volumen_rellenado = round(100 * as.numeric(tapply(en_per_tp$Q_m3s * relleno_dia_tp, anio_rel_tp, sum)) /
+                                    as.numeric(tapply(en_per_tp$Q_m3s, anio_rel_tp, sum)), 1)
+  )
+  relleno_anio_tp <- relleno_anio_tp[relleno_anio_tp$dias_rellenados > 0, ]
+  write.csv(relleno_anio_tp, "03_outputs/tables/05_relleno_por_anio_E04.csv", row.names = FALSE)
+}
+
+# 11.5 Anios en que P - Q supera a la PET
+if ("Q_mm_anio" %in% names(anual_e04_tp) && all(!is.na(anual_e04_tp$Q_mm_anio))) {
+  supera_tp <- sum(anual_e04_tp$P_mm_anio - anual_e04_tp$Q_mm_anio > anual_e04_tp$PET_mm_anio)
+  relaciones_tp <- rbind(relaciones_tp, data.frame(
+    indicador = c("Anios con P - Q mayor que PET", "Anios del periodo"),
+    valor = c(supera_tp, nrow(anual_e04_tp))))
+  write.csv(relaciones_tp, "03_outputs/tables/05_relaciones_anuales_E04.csv", row.names = FALSE)
+}
+
+# 12. Clasificacion de Koppen-Geiger (Beck et al., 2023)
+# Mapa de 1 km para 1991-2020 (parametro koppen_tif). Como el original pesa
+# poco mas de 12 MB y vive en raw (que no se versiona), el script guarda el
+# recorte de la cuenca en processed: sin el original, se usa ese recorte.
+# Codigos de clase segun legend.txt del mismo producto.
+simbolos_koppen_tp <- c("Af", "Am", "Aw", "BWh", "BWk", "BSh", "BSk", "Csa", "Csb", "Csc",
+                        "Cwa", "Cwb", "Cwc", "Cfa", "Cfb", "Cfc", "Dsa", "Dsb", "Dsc", "Dsd",
+                        "Dwa", "Dwb", "Dwc", "Dwd", "Dfa", "Dfb", "Dfc", "Dfd", "ET", "EF")
+recorte_koppen_tp <- file.path("01_data/processed", paste0("koppen_1991_2020_", codigo_tp, ".tif"))
+koppen_tif_tp <- config_tp$koppen_tif
+
+if (!is.null(koppen_tif_tp) && file.exists(koppen_tif_tp)) {
+  library(terra)
+  k_tp <- rast(koppen_tif_tp)
+  cuenca_k_tp <- project(vect(config_tp$poligono_clima), crs(k_tp))
+  k_cuenca_tp <- crop(k_tp, ext(cuenca_k_tp) + 0.05, snap = "out")
+  writeRaster(k_cuenca_tp, recorte_koppen_tp, overwrite = TRUE, datatype = "INT1U")
+} else if (file.exists(recorte_koppen_tp)) {
+  message("05: no esta el mapa original de Koppen (koppen_tif); se usa el recorte ",
+          recorte_koppen_tp)
+}
+
+if (file.exists(recorte_koppen_tp)) {
+  library(terra)
+  k_cuenca_tp <- rast(recorte_koppen_tp)
+  cuenca_k_tp <- project(vect(config_tp$poligono_clima), crs(k_cuenca_tp))
+  fr_tp <- extract(k_cuenca_tp, cuenca_k_tp, exact = TRUE)
+  names(fr_tp)[2] <- "clase"
+  koppen_tabla_tp <- aggregate(fraction ~ clase, fr_tp, sum)
+  koppen_tabla_tp$simbolo <- simbolos_koppen_tp[koppen_tabla_tp$clase]
+  koppen_tabla_tp$pct_area <- round(100 * koppen_tabla_tp$fraction / sum(koppen_tabla_tp$fraction), 1)
+  koppen_tabla_tp <- koppen_tabla_tp[order(-koppen_tabla_tp$pct_area), c("clase", "simbolo", "pct_area")]
+  write.csv(koppen_tabla_tp, "03_outputs/tables/05_koppen_cuenca.csv", row.names = FALSE)
+
+  clases_tp <- sort(unique(values(k_cuenca_tp)))
+  clases_tp <- clases_tp[!is.na(clases_tp)]
+  colores_k_tp <- c(Csb = "#C8C800", Cfb = "#64FF50", Cfc = "#32C800", Csc = "#969600",
+                    Cfa = "#C8FF50", Csa = "#FFFF00", ET = "#B2B2B2", Dfb = "#37C8FF", Dfc = "#007D7D")
+  # Colores de legend.txt para las clases de la zona; otra clase sale en gris.
+  col_clases_tp <- unname(colores_k_tp[simbolos_koppen_tp[clases_tp]])
+  col_clases_tp[is.na(col_clases_tp)] <- "grey60"
+  png("03_outputs/figures/05_mapa_koppen.png", width = 1400, height = 1100, res = 200)
+  par(mar = c(3, 3, 3, 1))
+  plot(k_cuenca_tp, type = "classes", levels = simbolos_koppen_tp[clases_tp],
+       col = col_clases_tp,
+       main = "Köppen-Geiger 1991-2020 (Beck et al., 2023)")
+  lines(cuenca_k_tp, lwd = 2)
+  dev.off()
+  message("05: Koppen-Geiger: ", paste(koppen_tabla_tp$simbolo, koppen_tabla_tp$pct_area, "%", collapse = "; "))
+}
