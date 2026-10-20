@@ -1,0 +1,2 @@
+"periodo","numero_anios","dias_estimados","w","indice_aridez","indice_evaporativo","regimen","precipitacion_mm_anio","pet_mm_anio","et_fu_mm_anio","escorrentia_mm_anio","demanda_superficial_mm_anio","saldo_con_demanda_mm_anio","residuo_sin_demanda_mm_anio","supuesto"
+"1987-2019",33,347,2.6,0.635969607718503,0.527091253864617,"Limitada por energia",1588.01084848485,1009.92663636364,837.026629278493,568.501358093233,22.2612077334253,160.221653379697,182.482861113122,"Ejercicio completo y continuo de derechos; no consumo medido"

@@ -1,5 +1,0 @@
-"archivo","unidad","primer_dato","ultimo_dato","observaciones_utiles","faltantes","faltantes_internos","fechas_ausentes","fechas_repetidas","desordenado","negativos","ceros","minimo","maximo"
-"precip_cr2met_day.csv","mm/dia",1979-01-01,2020-04-30,15096,0,0,0,0,FALSE,0,7513,0,85.673372
-"pet_hargreaves_day.csv","mm/dia",1979-01-01,2020-04-30,15096,0,0,0,0,FALSE,0,0,0.602,7.393
-"q_m3s_day.csv","m3/s",1986-02-01,2019-04-22,11638,32730,496,0,0,FALSE,0,0,0.021,157
-"cons_sf_wr_year.csv","L/s",1891-01-01,2021-01-01,131,0,0,0,0,FALSE,0,96,0,1100.659833329
