@@ -15,26 +15,16 @@ library(sf)
 # 2. LEER EL EXCEL
 
 # Omitir las seis filas anteriores a los encabezados.
-datos <- as.data.frame(read_excel(
-  "01_data/raw/Derechos_Concedidos_X_Region (1).xls",
-  skip = 6,
-  col_types = "text"
-))
+datos <- as.data.frame(read_excel("01_data/raw/Derechos_Concedidos_X_Region (1).xls",
+  skip = 6,col_types = "text"))
 
 # Seleccionar las columnas necesarias del Excel revisado.
-derechos <- datos[, c(
-  1, 2, 3, 9, 13, 14, 20, 33, 34, 35,
-  42, 43, 44, 45, 63, 65, 66
-)]
+derechos <- datos[, c(1, 2, 3, 9, 13, 14, 20, 33, 34, 35,42, 43, 44, 45, 63, 65, 66)]
 
 # Dar nombres simples a las columnas.
-names(derechos) <- c(
-  "registro", "expediente", "solicitud", "fecha_administrativa",
-  "tipo", "naturaleza", "fuente", "ejercicio",
-  "caudal_declarado", "unidad",
-  "norte", "este", "huso", "datum",
-  "varios_puntos", "renuncia", "transaccion"
-)
+names(derechos) <- c("registro", "expediente", "solicitud", "fecha_administrativa",
+                     "tipo", "naturaleza", "fuente", "ejercicio","caudal_declarado", "unidad",
+                     "norte", "este", "huso", "datum","varios_puntos", "renuncia", "transaccion")
 
 # Quitar espacios sobrantes.
 derechos[] <- lapply(derechos, trimws)
@@ -43,8 +33,7 @@ derechos[] <- lapply(derechos, trimws)
 # 3. SELECCIONAR DERECHOS SUPERFICIALES CONSUNTIVOS
 
 # Mantener solo derechos consuntivos de aguas superficiales.
-seleccion <- derechos$tipo %in% "Consuntivo" &
-  grepl("Superficial", derechos$naturaleza)
+seleccion <- derechos$tipo %in% "Consuntivo" & grepl("Superficial", derechos$naturaleza)
 
 derechos <- derechos[seleccion, ]
 
@@ -59,14 +48,13 @@ derechos$norte <- as.numeric(derechos$norte)
 # Por ejemplo: datum 1984 y huso 18 corresponden al codigo 32718.
 # Estos codigos identifican sistemas existentes; no se calculan.
 
-sistemas <- c(
-  "1984_18" = 32718,  # WGS84, huso 18 Sur
-  "1984_19" = 32719,  # WGS84, huso 19 Sur
-  "1956_18" = 24878,  # PSAD56, huso 18 Sur
-  "1956_19" = 24879,  # PSAD56, huso 19 Sur
-  "1969_18" = 29188,  # SAD69, huso 18 Sur
-  "1969_19" = 29189   # SAD69, huso 19 Sur
-)
+sistemas <- c("1984_18" = 32718,  # WGS84, huso 18 Sur
+              "1984_19" = 32719,  # WGS84, huso 19 Sur
+              "1956_18" = 24878,  # PSAD56, huso 18 Sur
+              "1956_19" = 24879,  # PSAD56, huso 19 Sur
+              "1969_18" = 29188,  # SAD69, huso 18 Sur
+              "1969_19" = 29189)   # SAD69, huso 19 Sur
+              
 
 # Juntar datum y huso: por ejemplo, crear el texto "1984_18".
 grupo <- paste(derechos$datum, derechos$huso, sep = "_")
@@ -75,10 +63,8 @@ grupo <- paste(derechos$datum, derechos$huso, sep = "_")
 derechos$epsg <- unname(sistemas[grupo])
 
 # Identificar registros con coordenadas y sistema conocidos.
-ubicables <- with(derechos,
-                  is.finite(este) & is.finite(norte) &
-                    este > 0 & norte > 0 & !is.na(epsg)
-)
+ubicables <- with(derechos,is.finite(este) & is.finite(norte) &
+                    este > 0 & norte > 0 & !is.na(epsg))
 
 # Guardar aparte los registros que necesitan revision.
 pendientes <- derechos[!ubicables, ]
@@ -117,10 +103,7 @@ puntos <- do.call(rbind, capas)
 # 6. SELECCIONAR CAPTACIONES DENTRO DE LA CUENCA
 
 # Leer el poligono descargado de CAMELS.
-cuenca <- st_read(
-  "01_data/raw/polygon/polygon.shp",
-  quiet = TRUE
-)
+cuenca <- st_read("01_data/raw/polygon/polygon.shp",quiet = TRUE)
 
 # Corregir posibles problemas geometricos.
 cuenca <- st_make_valid(cuenca)
@@ -138,23 +121,14 @@ derechos_cuenca <- puntos[dentro, ]
 # 7. GUARDAR LAS TABLAS
 
 # Guardar los registros seleccionados dentro de la cuenca.
-write.csv(
-  st_drop_geometry(derechos_cuenca),
-  "01_data/processed/derechos_superficiales_cuenca_DGA.csv",
-  row.names = FALSE,
-  na = "",
-  fileEncoding = "UTF-8"
-)
+write.csv(st_drop_geometry(derechos_cuenca),
+          "01_data/processed/derechos_superficiales_cuenca_DGA.csv",row.names = FALSE,na = "",
+          fileEncoding = "UTF-8")
 
 # Guardar los registros regionales pendientes de ubicacion.
 # Todavia no sabemos si pertenecen a nuestra cuenca.
-write.csv(
-  pendientes,
-  "01_data/processed/derechos_DGA_pendientes_ubicacion.csv",
-  row.names = FALSE,
-  na = "",
-  fileEncoding = "UTF-8"
-)
+write.csv(pendientes,"01_data/processed/derechos_DGA_pendientes_ubicacion.csv",
+  row.names = FALSE,na = "",fileEncoding = "UTF-8")
 
 
 # 8. GUARDAR LAS CAPAS PARA QGIS
@@ -163,22 +137,10 @@ write.csv(
 archivo_mapa <- "01_data/processed/derechos_superficiales_cuenca_DGA.gpkg"
 
 # Guardar el limite de la cuenca.
-st_write(
-  cuenca,
-  archivo_mapa,
-  layer = "limite_utilizado",
-  delete_layer = TRUE,
-  quiet = TRUE
-)
+st_write(cuenca,archivo_mapa,layer = "limite_utilizado",delete_layer = TRUE,quiet = TRUE)
 
 # Guardar las captaciones seleccionadas.
-st_write(
-  derechos_cuenca,
-  archivo_mapa,
-  layer = "captaciones",
-  delete_layer = TRUE,
-  quiet = TRUE
-)
+st_write(derechos_cuenca,archivo_mapa,layer = "captaciones",delete_layer = TRUE,quiet = TRUE)
 
 
 # 9. MOSTRAR LOS RESULTADOS

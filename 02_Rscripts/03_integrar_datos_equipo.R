@@ -7,79 +7,45 @@
 
 anios <- 1987:2019
 
-configuracion <- read.csv(
-  "06_config/parametros.csv",
-  colClasses = "character"
-)
+configuracion <- read.csv("06_config/parametros.csv",colClasses = "character")
 
-codigo <- configuracion$valor[
-  configuracion$parametro == "codigo_camels"
-]
+codigo <- configuracion$valor[configuracion$parametro == "codigo_camels"]
 
-atributos <- read.csv(
-  "01_data/raw/catchment_attributes.csv",
-  header = FALSE,
-  colClasses = "character"
-)
+atributos <- read.csv("01_data/raw/catchment_attributes.csv",header = FALSE,colClasses = "character")
 
-area_km2 <- as.numeric(
-  atributos$V2[atributos$V1 == "area_km2"]
-)
+area_km2 <- as.numeric(atributos$V2[atributos$V1 == "area_km2"])
 
 # Las fuentes utilizadas corresponden a esta estacion.
-stopifnot(
-  length(codigo) == 1,
-  codigo == "10362001",
-  length(area_km2) == 1,
-  is.finite(area_km2),
-  area_km2 > 0
-)
+stopifnot(length(codigo) == 1,codigo == "10362001",length(area_km2) == 1,
+          is.finite(area_km2),area_km2 > 0)
 
-calendario <- seq(
-  as.Date(paste0(min(anios), "-01-01")),
-  as.Date(paste0(max(anios), "-12-31")),
-  by = "day"
-)
+calendario <- seq(as.Date(paste0(min(anios), "-01-01")),as.Date(paste0(max(anios), "-12-31")),by = "day")
 
 
 # 2. LEER Y SELECCIONAR LOS DATOS
 
 # Precipitacion preparada por Fernanda.
-clima <- read.csv(
-  "01_data/processed/clima_CR2METv25_10362001_daily_1960-2021.csv"
-)
+clima <- read.csv("01_data/processed/clima_CR2METv25_10362001_daily_1960-2021.csv")
 
 clima <- clima[, c("fecha", "P_mm")]
 names(clima) <- c("fecha", "precipitacion_mm_dia")
 
 # Caudal observado y completado por Alexis.
-caudal <- read.csv(
-  "01_data/processed/caudal_diario_para_airGR_1987_2019.csv"
-)
+caudal <- read.csv("01_data/processed/caudal_diario_para_airGR_1987_2019.csv")
 
-caudal <- caudal[, c(
-  "fecha", "Q_observado_m3s", "Q_completado_m3s",
-  "metodo_relleno", "estacion_donante"
-)]
+caudal <- caudal[, c("fecha", "Q_observado_m3s", "Q_completado_m3s",
+                     "metodo_relleno", "estacion_donante")]
 
-names(caudal)[2:3] <- c(
-  "caudal_m3_s", "caudal_analisis_m3_s"
-)
+names(caudal)[2:3] <- c("caudal_m3_s", "caudal_analisis_m3_s")
 
 # PET Hargreaves de CAMELS.
-pet <- read.csv(
-  "01_data/raw/pet_hargreaves_day.csv",
-  check.names = FALSE
-)
+pet <- read.csv("01_data/raw/pet_hargreaves_day.csv",check.names = FALSE)
 
 pet <- pet[, c("date", codigo)]
 names(pet) <- c("fecha", "pet_mm_dia")
 
 # Derechos superficiales de CAMELS, registrados en L/s.
-derechos <- read.csv(
-  "01_data/raw/cons_sf_wr_year.csv",
-  check.names = FALSE
-)
+derechos <- read.csv("01_data/raw/cons_sf_wr_year.csv",check.names = FALSE)
 
 derechos <- derechos[, c("date", codigo)]
 names(derechos) <- c("fecha", "derechos_superficiales_L_s")
@@ -114,20 +80,14 @@ variables <- c(
 )
 
 # Comprobar que todos los dias tengan P, PET y Q utilizables.
-stopifnot(
-  nrow(datos) == length(calendario),
-  all(datos$fecha == calendario),
-  all(is.finite(as.matrix(datos[, variables]))),
-  all(as.matrix(datos[, variables]) >= 0)
-)
+stopifnot(nrow(datos) == length(calendario),all(datos$fecha == calendario),
+  all(is.finite(as.matrix(datos[, variables]))),all(as.matrix(datos[, variables]) >= 0))
 
 # El caudal observado puede contener NA, pero no valores invalidos.
 observados <- !is.na(datos$caudal_m3_s)
 
-stopifnot(
-  all(is.finite(datos$caudal_m3_s[observados])),
-  all(datos$caudal_m3_s[observados] >= 0)
-)
+stopifnot(all(is.finite(datos$caudal_m3_s[observados])),
+  all(datos$caudal_m3_s[observados] >= 0))
 
 datos$anio <- as.integer(format(datos$fecha, "%Y"))
 
@@ -148,28 +108,20 @@ derechos$anio <- as.integer(format(derechos$fecha, "%Y"))
 derechos <- derechos[derechos$anio %in% anios, ]
 derechos <- derechos[order(derechos$anio), ]
 
-stopifnot(
-  nrow(derechos) == length(anios),
-  all(derechos$anio == anios),
+stopifnot(nrow(derechos) == length(anios),all(derechos$anio == anios),
   all(is.finite(derechos$derechos_superficiales_L_s)),
-  all(derechos$derechos_superficiales_L_s >= 0)
-)
+  all(derechos$derechos_superficiales_L_s >= 0))
 
 # Convertir L/s a m3/s. No acumular nuevamente entre anos.
-derechos$derechos_superficiales_m3_s <-
-  derechos$derechos_superficiales_L_s / 1000
+derechos$derechos_superficiales_m3_s <- derechos$derechos_superficiales_L_s / 1000
 
 # Contar los dias calendario de cada ano, incluidos los bisiestos.
-derechos$dias_esperados <- as.integer(
-  as.Date(paste0(derechos$anio + 1, "-01-01")) -
-    as.Date(paste0(derechos$anio, "-01-01"))
-)
+derechos$dias_esperados <- as.integer(as.Date(paste0(derechos$anio + 1, "-01-01")) -
+                                        as.Date(paste0(derechos$anio, "-01-01")))
 
 # Demanda potencial suponiendo ejercicio continuo todo el ano.
 # Esta conversion no representa consumo efectivamente medido.
-derechos$demanda_derechos_mm_anio <-
-  derechos$derechos_superficiales_m3_s *
-  derechos$dias_esperados * factor_diario
+derechos$demanda_derechos_mm_anio <- derechos$derechos_superficiales_m3_s * derechos$dias_esperados * factor_diario
 
 
 # 5. CALCULAR TODOS LOS VALORES ANUALES
@@ -215,25 +167,13 @@ tabla_budyko$fuente_caudal <- "DGA; completado por Alexis"
 tabla_budyko$fuente_area <- "CAMELS; catchment_attributes.csv"
 tabla_budyko$fuente_derechos <- "CAMELS; cons_sf_wr_year.csv"
 
-tabla_budyko$supuesto_demanda <-
-  "Ejercicio completo y continuo de derechos; no consumo medido"
+tabla_budyko$supuesto_demanda <- "Ejercicio completo y continuo de derechos; no consumo medido"
 
-dir.create(
-  "01_data/processed",
-  recursive = TRUE, showWarnings = FALSE
-)
+dir.create("01_data/processed",recursive = TRUE, showWarnings = FALSE)
 
-write.csv(
-  datos,
-  "01_data/processed/base_diaria_budyko.csv",
-  row.names = FALSE
-)
+write.csv(datos,"01_data/processed/base_diaria_budyko.csv",row.names = FALSE)
 
-write.csv(
-  tabla_budyko,
-  "01_data/processed/base_anual_budyko.csv",
-  row.names = FALSE
-)
+write.csv(tabla_budyko,"01_data/processed/base_anual_budyko.csv",row.names = FALSE)
 
 
 # 7. MOSTRAR EL RESUMEN
@@ -244,13 +184,7 @@ cat("Anos completos:", sum(tabla_budyko$anio_completo), "\n")
 cat("Dias del periodo:", nrow(datos), "\n")
 cat("Dias estimados:", sum(datos$caudal_estimado), "\n")
 
-print(
-  tabla_budyko[, c(
-    "anio", "dias_estimados", "precipitacion_mm_anio",
-    "pet_mm_anio", "escorrentia_mm_anio",
-    "demanda_derechos_mm_anio"
-  )],
-  row.names = FALSE
-)
+print(tabla_budyko[, c("anio", "dias_estimados", "precipitacion_mm_anio",
+    "pet_mm_anio", "escorrentia_mm_anio","demanda_derechos_mm_anio")],row.names = FALSE)
 
 cat("\nBases guardadas. Continuar con 04_balance_budyko.R\n")
