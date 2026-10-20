@@ -1,4 +1,7 @@
-"variable","periodo","n_anios","ultimo_anio_antes_del_quiebre","K","p_monte_carlo","p_aproximado","quiebre_significativo_5pct","media_antes","media_despues"
-"P_mm_anio","1960-2021",62,"1986",377,0.043,0.059,TRUE,1761.16,1578.7
-"PET_mm_anio","1960-2021",62,"2010",389,0.026,0.047,TRUE,961.1,997.4
-"Tmed_degC","1960-2021",62,"1976",420,0.02,0.025,TRUE,10.97,11.3
+"variable","tramo","periodo","n_anios","ultimo_anio_antes_del_quiebre","K","p_monte_carlo","p_aproximado","quiebre_significativo_5pct","media_antes","media_despues"
+"P_mm_anio","registro","1960-2021",62,"1986",377,0.043,0.059,TRUE,1761.16,1578.7
+"PET_mm_anio","registro","1960-2021",62,"2010",389,0.026,0.047,TRUE,961.1,997.4
+"Tmed_degC","registro","1960-2021",62,"1976",420,0.02,0.025,TRUE,10.97,11.3
+"P_mm_anio","periodo","1987-2019",33,"1991",58,0.865,1,FALSE,1484.06,1622.55
+"PET_mm_anio","periodo","1987-2019",33,"2010",128,0.106,0.141,FALSE,965.75,993.65
+"Tmed_degC","periodo","1987-2019",33,"2012",90,0.396,0.538,FALSE,11.22,11.48
