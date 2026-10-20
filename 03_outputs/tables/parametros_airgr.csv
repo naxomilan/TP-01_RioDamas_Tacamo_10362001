@@ -1,0 +1,5 @@
+"parametro","descripcion","valor","unidad"
+"X1","Capacidad del almacenamiento de produccion",395.440368155324,"mm"
+"X2","Coeficiente de intercambio entre cuencas",-6.49464444775532,"mm/dia"
+"X3","Capacidad del almacenamiento de transferencia",89.1214458786587,"mm"
+"X4","Constante temporal del hidrograma unitario",2.37387387387387,"dias"
