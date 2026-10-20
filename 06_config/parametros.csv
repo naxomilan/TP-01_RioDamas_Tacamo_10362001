@@ -4,7 +4,12 @@ codigo_camels,10362001
 ruta_cr2met,01_data/raw/cr2met_v2.5
 poligono_clima,01_data/processed/cuenca_rio_damas.gpkg
 pet_referencia,01_data/raw/camels_cl_10362001/pet_hargreaves_day.csv
-serie_caudal,01_data/processed/caudal_diario_dga_10362001.csv
+serie_caudal,01_data/processed/caudal_diario_para_airGR_1987_2019.csv
+caudal_col_fecha,fecha
+caudal_col_valor,Q_completado_m3s
+caudal_col_observado,Q_observado_m3s
+caudal_col_metodo,metodo_relleno
 p_referencia,01_data/raw/camels_cl_10362001/precip_cr2met_day.csv
 periodo_inicio,1987
 periodo_fin,2019
+koppen_tif,01_data/raw/koppen_beck2023/koppen_geiger_0p00833333.tif
