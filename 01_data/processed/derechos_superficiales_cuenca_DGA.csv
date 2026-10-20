@@ -1,0 +1,141 @@
+"registro","expediente","solicitud","fecha_administrativa","tipo","naturaleza","fuente","ejercicio","caudal_declarado","unidad","norte","este","huso","datum","varios_puntos","renuncia","transaccion","epsg"
+"2732","ND-1002-7061","1","06/08/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Eventual y Discontinuo","5,8333","Lt/s",5501530,665910,"18","1984",,"NO","NO",32718
+"2733","ND-1002-7061","1","06/08/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","34,1667","Lt/s",5501530,665910,"18","1984",,"NO","NO",32718
+"2749","ND-1002-7049","1","05/08/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Discontinuo","5,0833","Lt/s",5498548,680250,"18","1984",,"NO","NO",32718
+"2750","ND-1002-7049","1","05/08/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Eventual y Discontinuo","4,9167","Lt/s",5498548,680250,"18","1984",,"NO","NO",32718
+"2895","ND-1002-800340","1","04/06/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","30","Lt/s",5502110,666420,"18","1984",,"NO","NO",32718
+"2896","ND-1002-800341","1","04/06/2021","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","30","Lt/s",5502230,667240,"18","1984",,"NO","NO",32718
+"3454","ND-1002-6568","1","08/10/2020","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","2,6667","Lt/s",5497463,664798,"18","1984",,"NO","NO",32718
+"3455","ND-1002-6568","1","08/10/2020","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","1,3333","Lt/s",5497463,664798,"18","1984",,"NO","NO",32718
+"3824","ND-1002-6565","1","12/06/2020","Consuntivo","Superficial y Corriente","Rio Moro","Permanente y Discontinuo","3,3333","Lt/s",5496519,685809,"18","1984",,"NO","NO",32718
+"3825","ND-1002-6565","1","12/06/2020","Consuntivo","Superficial y Corriente","Rio Moro","Eventual y Discontinuo","6,6667","Lt/s",5496519,685809,"18","1984",,"NO","NO",32718
+"3873","ND-1002-6667","1","28/05/2020","Consuntivo","Superficial y Detenida","Estero Quebrada Honda","Eventual y Discontinuo","0,3333","Lt/s",5493215,689485,"18","1984",,"NO","NO",32718
+"3874","ND-1002-6667","1","28/05/2020","Consuntivo","Superficial y Detenida","Estero Quebrada Honda","Permanente y Continuo","4,6667","Lt/s",5493215,689485,"18","1984",,"NO","NO",32718
+"4198","ND-1002-6346","1","02/12/2019","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","1,6667","Lt/s",5498073,683187,"18","1984",,"NO","NO",32718
+"4199","ND-1002-6346","1","02/12/2019","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","0,3333","Lt/s",5498073,683187,"18","1984",,"NO","NO",32718
+"4385","ND-1002-6360","1","14/10/2019","Consuntivo","Superficial y Corriente","Estero Coipuco","Permanente y Discontinuo","16,3333","Lt/s",5494266,679722,"18","1984",,"NO","NO",32718
+"4386","ND-1002-6360","1","14/10/2019","Consuntivo","Superficial y Corriente","Estero Coipuco","Eventual y Discontinuo","32,6667","Lt/s",5494266,679722,"18","1984",,"NO","NO",32718
+"4436","ND-1002-6436","1","30/09/2019","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Discontinuo","1,3333","Lt/s",5486799,695598,"18","1984",,"NO","NO",32718
+"4437","ND-1002-6436","1","30/09/2019","Consuntivo","Superficial y Corriente","Estero Pichidamas","Eventual y Discontinuo","2,6667","Lt/s",5486799,695598,"18","1984",,"NO","NO",32718
+"5315","ND-1002-6156","1","28/11/2018","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","5","Lt/s",5492708,690540,"18","1984",,"NO","NO",32718
+"6259","ND-1002-6056","1","20/12/2017","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","2","Lt/s",5494156,683540,"18","1984",,"NO","NO",32718
+"6260","ND-1002-6067","1","20/12/2017","Consuntivo","Superficial y Corriente","Estero Coipuco","Permanente y Discontinuo","0,6667","Lt/s",5494270,679644,"18","1984",,"NO","NO",32718
+"6261","ND-1002-6067","1","20/12/2017","Consuntivo","Superficial y Corriente","Estero Coipuco","Eventual y Discontinuo","1,3333","Lt/s",5494270,679644,"18","1984",,"NO","NO",32718
+"6268","ND-1002-6055","1","19/12/2017","Consuntivo","Superficial y Corriente","Rio Moro","Permanente y Discontinuo","1,6667","Lt/s",5496072,691030,"18","1984",,"NO","NO",32718
+"6269","ND-1002-6055","1","19/12/2017","Consuntivo","Superficial y Corriente","Rio Moro","Eventual y Discontinuo","2,0833","Lt/s",5496072,691030,"18","1984",,"NO","NO",32718
+"6290","ND-1002-5988","1","15/12/2017","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Discontinuo","1,1667","Lt/s",5493413,683683,"18","1984",,"NO","NO",32718
+"6291","ND-1002-5988","1","15/12/2017","Consuntivo","Superficial y Corriente","Rio Damas","Eventual y Discontinuo","0,8333","Lt/s",5493413,683683,"18","1984",,"NO","NO",32718
+"6448","ND-1002-5671","1","01/12/2017","Consuntivo","Superficial y Corriente","Rio Damas","Eventual y Discontinuo","7,5000","Lt/s",5491340,685847,"18","1984",,"NO","NO",32718
+"6449","ND-1002-5671","1","01/12/2017","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","32,5000","Lt/s",5491340,685847,"18","1984",,"NO","NO",32718
+"6498","ND-1002-5510","1","22/11/2017","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","37","Lt/s",5493474,683416,"18","1984",,"NO","NO",32718
+"6499","ND-1002-5550","1","22/11/2017","Consuntivo","Superficial y Corriente","Estero Coipuco","Permanente y Continuo","25,1250","Lt/s",5494266,679805,"18","1984",,"NO","NO",32718
+"6500","ND-1002-5696","1","22/11/2017","Consuntivo","Superficial y Corriente","Estero Coipuco","Permanente y Continuo","25,1250","Lt/s",5494257,679885,"18","1984",,"NO","NO",32718
+"6544","ND-1002-5626","1","14/11/2017","Consuntivo","Superficial y Corriente","Rio sin Nombre","Permanente y Discontinuo","16,6667","Lt/s",5496672,682618,"18","1984",,"NO","NO",32718
+"6545","ND-1002-5626","1","14/11/2017","Consuntivo","Superficial y Corriente","Rio sin Nombre","Eventual y Discontinuo","21,9167","Lt/s",5496672,682618,"18","1984",,"NO","NO",32718
+"6558","ND-1002-5796","1","10/11/2017","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","2,4250","Lt/s",5491099,698769,"18","1984",,"NO","NO",32718
+"6559","ND-1002-5796","1","10/11/2017","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Continuo","8,2083","Lt/s",5491099,698769,"18","1984",,"NO","NO",32718
+"6653","ND-1002-5634","1","18/10/2017","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","5","Lt/s",5503770,672300,"18","1984",,"NO","NO",32718
+"6736","ND-1002-5427","1","27/09/2017","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,0067","Lt/s",5492403,690768,"18","1984",,"NO","NO",32718
+"6737","ND-1002-5427","1","27/09/2017","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","0,0300","Lt/s",5492403,690768,"18","1984",,"NO","NO",32718
+"6771","ND-1002-5428","1","15/09/2017","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","5","Lt/s",5494386,680657,"18","1984",,"NO","NO",32718
+"6807","ND-1002-5292","1","08/09/2017","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Discontinuo","20","Lt/s",5487048,688730,"18","1984",,"NO","NO",32718
+"6808","ND-1002-5292","1","08/09/2017","Consuntivo","Superficial y Corriente","Estero Pichidamas","Eventual y Discontinuo","20,4167","Lt/s",5487048,688730,"18","1984",,"NO","NO",32718
+"6809","ND-1002-5293","1","08/09/2017","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Continuo","24,8333","Lt/s",5490496,683248,"18","1984",,"NO","NO",32718
+"6810","ND-1002-5293","1","08/09/2017","Consuntivo","Superficial y Corriente","Estero Pichidamas","Eventual y Discontinuo","15,9167","Lt/s",5490496,683248,"18","1984",,"NO","NO",32718
+"6843","ND-1002-4912","1","23/08/2017","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Discontinuo","100","Lt/s",5487359,682805,"18","1984",,"NO","NO",32718
+"6844","ND-1002-4912","1","23/08/2017","Consuntivo","Superficial y Corriente","Estero De Pichil","Eventual y Discontinuo","132,2500","Lt/s",5487359,682805,"18","1984",,"NO","NO",32718
+"7077","ND-1002-5289","1","16/06/2017","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","1,4000","Lt/s",5501776,677568,"18","1984",,"NO","NO",32718
+"7078","ND-1002-5289","1","16/06/2017","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","4,9000","Lt/s",5501776,677568,"18","1984",,"NO","NO",32718
+"7109","ND-1002-5151","1","14/06/2017","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","15","Lt/s",5502263,677164,"18","1984",,"NO","NO",32718
+"7249","ND-1002-4980","1","04/04/2017","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","24,3833","Lt/s",5486486,691488,"18","1984",,"NO","NO",32718
+"7250","ND-1002-5071","1","04/04/2017","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Continuo","40,9167","Lt/s",5489000,687200,"18","1984",,"NO","NO",32718
+"7523","ND-1002-4837","1","09/12/2016","Consuntivo","Superficial y Corriente","Rio Moro","Permanente y Discontinuo","15","Lt/s",5496401,684782,"18","1984",,"NO","NO",32718
+"7524","ND-1002-4837","1","09/12/2016","Consuntivo","Superficial y Corriente","Rio Moro","Eventual y Discontinuo","30","Lt/s",5496401,684782,"18","1984",,"NO","NO",32718
+"7588","ND-1002-4838","1","23/11/2016","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Eventual y Discontinuo","5,4167","Lt/s",5495130,684323,"18","1984",,"NO","NO",32718
+"7589","ND-1002-4838","1","23/11/2016","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","34,5833","Lt/s",5495130,684323,"18","1984",,"NO","NO",32718
+"7653","ND-1002-4598","1","11/11/2016","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","2","Lt/s",5494379,680436,"18","1984",,"NO","NO",32718
+"7691","ND-1002-4892","1","24/10/2016","Consuntivo","Superficial y Corriente","Estero Coipuco","Permanente y Continuo","5","Lt/s",5493938,680459,"18","1984",,"NO","NO",32718
+"7830","VT-1002-125","1","30/09/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","3","Lt/s",5501640,680121,"18","1984",,"NO","NO",32718
+"8002","ND-1002-4574","1","10/08/2016","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Continuo","10","Lt/s",5492242,679244,"18","1984",,"NO","NO",32718
+"8033","VT-1002-123","1","29/07/2016","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","10","Lt/s",5501192,679344,"18","1984",,"NO","NO",32718
+"8034","VT-1002-124","1","29/07/2016","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","5","Lt/s",5501192,679344,"18","1984",,"NO","NO",32718
+"8129","ND-1002-4445","1","10/06/2016","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","10","Lt/s",5494518,681276,"18","1984",,"NO","NO",32718
+"8359","ND-1002-4291","1","11/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","4,0833","Lt/s",5500561,682021,"18","1984",,"NO","NO",32718
+"8360","ND-1002-4291","1","11/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","2,9167","Lt/s",5500561,682021,"18","1984",,"NO","NO",32718
+"8422","ND-1002-4303","1","03/12/2015","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,6667","Lt/s",5494325,697109,"18","1984",,"NO","NO",32718
+"8423","ND-1002-4303","1","03/12/2015","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Discontinuo","1,3333","Lt/s",5494325,697109,"18","1984",,"NO","NO",32718
+"8424","ND-1002-4304","1","03/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","10","Lt/s",5493369,696680,"18","1984",,"NO","NO",32718
+"8425","ND-1002-4304","1","03/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","19","Lt/s",5493369,696680,"18","1984",,"NO","NO",32718
+"8426","ND-1002-4305","1","03/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","3,7500","Lt/s",5493615,696238,"18","1984",,"NO","NO",32718
+"8427","ND-1002-4305","1","03/12/2015","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","10","Lt/s",5493615,696238,"18","1984",,"NO","NO",32718
+"8428","ND-1002-4306","1","03/12/2015","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,1000","Lt/s",5493602,696278,"18","1984",,"NO","NO",32718
+"8429","ND-1002-4306","1","03/12/2015","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","0,8333","Lt/s",5493602,696278,"18","1984",,"NO","NO",32718
+"9064","VT-1002-96","1","31/07/2015","Consuntivo","Superficial y Corriente","Estero De Pichil","Eventual y Continuo","5","Lt/s",5488929,681611,"18","1984",,"NO","NO",32718
+"9065","VT-1002-96","1","31/07/2015","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Continuo","10","Lt/s",5488929,681611,"18","1984",,"NO","NO",32718
+"9974","ND-1002-4050","1","19/11/2012","Consuntivo","Superficial y Corriente","Estero Luman","Permanente y Discontinuo","5","Lt/s",5497126,695562,"18","1984",,"NO","NO",32718
+"9975","ND-1002-4050","1","19/11/2012","Consuntivo","Superficial y Corriente","Estero Luman","Eventual y Discontinuo","2,5000","Lt/s",5497126,695562,"18","1984",,"NO","NO",32718
+"10188","ND-1002-4038","1","07/09/2012","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,0030","Lt/s",5496652,691340,"18","1984",,"NO","NO",32718
+"10189","ND-1002-4039","1","07/09/2012","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,0030","Lt/s",5496605,691250,"18","1984",,"NO","NO",32718
+"10391","ND-1002-3966","1","28/06/2012","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","49","Lt/s",5498177,668317,"18","1984",,"NO","NO",32718
+"10645","ND-1002-3701","1","15/11/2011","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","5","Lt/s",5490757,696875,"18","1984",,"NO","NO",32718
+"10646","ND-1002-3701","2","15/11/2011","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","5","Lt/s",5490578,695950,"18","1984",,"NO","NO",32718
+"10647","ND-1002-3701","3","15/11/2011","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","0,5000","Lt/s",5490369,696013,"18","1984",,"NO","NO",32718
+"10648","ND-1002-3701","3","15/11/2011","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","4,5000","Lt/s",5490369,696013,"18","1984",,"NO","NO",32718
+"10731","ND-1002-3775","1","12/10/2011","Consuntivo","Superficial y Corriente","Estero Pichidamas","Permanente y Continuo","0,5000","Lt/s",5492245,679246,"18","1984",,"NO","NO",32718
+"10840","ND-1002-3573","1","15/09/2011","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","5","Lt/s",5492410,692959,"18","1984",,"NO","NO",32718
+"10841","ND-1002-3573","2","15/09/2011","Consuntivo","Superficial y Corriente","Estero Quebrada Honda","Permanente y Continuo","10","Lt/s",5491589,693884,"18","1984",,"NO","NO",32718
+"11499","ND-1002-3552","1","20/12/2010","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,4083","Lt/s",5485219,692484,"18","1984",,"NO","NO",32718
+"11500","ND-1002-3552","1","20/12/2010","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","2,7000","Lt/s",5485219,692484,"18","1984",,"NO","NO",32718
+"12244","ND-1002-1829","1","17/03/2010","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Discontinuo","6,6667","Lt/s",5489053,680449,"18","1984",,"NO","NO",32718
+"12245","ND-1002-1829","1","17/03/2010","Consuntivo","Superficial y Corriente","Estero De Pichil","Eventual y Discontinuo","3,3333","Lt/s",5489053,680449,"18","1984",,"NO","NO",32718
+"12288","ND-1002-3285","1","22/02/2010","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","49","Lt/s",5502233,667239,"18","1984",,"NO","NO",32718
+"12327","ND-1002-1883","1","05/02/2010","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Discontinuo","28,3333","Lt/s",5487382,684836,"18","1984",,"NO","NO",32718
+"12328","ND-1002-1883","1","05/02/2010","Consuntivo","Superficial y Corriente","Estero De Pichil","Eventual y Discontinuo","20,5833","Lt/s",5487382,684836,"18","1984",,"NO","NO",32718
+"3049","ND-1002-800332","1","19/03/2021","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","4","Lt/s",5496821,671516,"18","1956",,"NO","NO",24878
+"8255","ND-1002-800358","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","0,0833","Lt/s",5488014,692383,"18","1956",,"NO","NO",24878
+"8256","ND-1002-800358","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","1,9167","Lt/s",5488014,692383,"18","1956",,"NO","NO",24878
+"8257","ND-1002-800359","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","7,4167","Lt/s",5488540,691934,"18","1956",,"NO","NO",24878
+"8258","ND-1002-800359","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","1,5833","Lt/s",5488540,691934,"18","1956",,"NO","NO",24878
+"8259","ND-1002-800360","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","7,3750","Lt/s",5488868,691558,"18","1956",,"NO","NO",24878
+"8260","ND-1002-800360","1","23/02/2016","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","1,6250","Lt/s",5488868,691558,"18","1956",,"NO","NO",24878
+"12632","ND-1002-865","1","09/09/2009","Consuntivo","Superficial y Corriente","Estero De Pichil","Eventual y Discontinuo","3,7500","Lt/s",5485401,691233,"18","1956",,"NO","NO",24878
+"12633","ND-1002-865","1","09/09/2009","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Continuo","25,5000","Lt/s",5485401,691233,"18","1956",,"NO","NO",24878
+"12634","ND-1002-865","2","09/09/2009","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","0,2442","Lt/s",5485578,690967,"18","1956",,"NO","NO",24878
+"12635","ND-1002-865","2","09/09/2009","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","0,8600","Lt/s",5485578,690967,"18","1956",,"NO","NO",24878
+"12973","ND-1002-629","1","30/01/2009","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Continuo","2","Lt/s",5488385,682495,"18","1956",,"NO","NO",24878
+"12974","ND-1002-629","2","30/01/2009","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","2","Lt/s",5487488,684148,"18","1956",,"NO","NO",24878
+"13806","ND-1002-1832","1","22/05/2007","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","5","Lt/s",5493804,675812,"18","1956",,"NO","NO",24878
+"13975","ND-1002-1750","1","28/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Eventual y Discontinuo","0,7500","Lt/s",5489808,690594,"18","1956",,"NO","NO",24878
+"13976","ND-1002-1750","1","28/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","4,2500","Lt/s",5489808,690594,"18","1956",,"NO","NO",24878
+"13977","ND-1002-1751","1","28/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Eventual y Discontinuo","0,7500","Lt/s",5490021,690392,"18","1956",,"NO","NO",24878
+"13978","ND-1002-1751","1","28/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","4,2500","Lt/s",5490021,690392,"18","1956",,"NO","NO",24878
+"14017","ND-1002-1752","1","24/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Eventual y Discontinuo","0,5417","Lt/s",5490331,690150,"18","1956",,"NO","NO",24878
+"14018","ND-1002-1752","1","24/11/2006","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","4,4583","Lt/s",5490331,690150,"18","1956",,"NO","NO",24878
+"14281","ND-1002-1762","1","16/08/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","-0,0833","Lt/s",5488014,692383,"18","1956",,"NO","SI",24878
+"14282","ND-1002-1762","1","16/08/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","-1,9167","Lt/s",5488014,692383,"18","1956",,"NO","SI",24878
+"14589","ND-1002-1575","1","02/02/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","0,2500","Lt/s",5487763,692530,"18","1956",,"NO","NO",24878
+"14590","ND-1002-1575","1","02/02/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","19,7500","Lt/s",5487763,692530,"18","1956",,"NO","NO",24878
+"14591","ND-1002-1575","2","02/02/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","1,5000","Lt/s",5487255,692540,"18","1956",,"NO","NO",24878
+"14592","ND-1002-1575","2","02/02/2006","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Continuo","13,5000","Lt/s",5487255,692540,"18","1956",,"NO","NO",24878
+"14681","ND-1002-1748","1","06/10/2005","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","5","Lt/s",5490540,689594,"18","1956",,"NO","NO",24878
+"14682","ND-1002-1749","1","06/10/2005","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","5","Lt/s",5490486,689785,"18","1956",,"NO","NO",24878
+"14683","ND-1002-1756","1","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","1","Lt/s",5495100,684923,"18","1956",,"NO","NO",24878
+"14684","ND-1002-1756","1","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","0,9000","Lt/s",5495100,684923,"18","1956",,"NO","NO",24878
+"14685","ND-1002-1756","2","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","1,3000","Lt/s",5495098,684795,"18","1956",,"NO","NO",24878
+"14686","ND-1002-1756","2","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","2,1000","Lt/s",5495098,684795,"18","1956",,"NO","NO",24878
+"14687","ND-1002-1756","3","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Continuo","1,1000","Lt/s",5495121,684874,"18","1956",,"NO","NO",24878
+"14688","ND-1002-1756","3","06/10/2005","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Eventual y Continuo","1,3000","Lt/s",5495121,684874,"18","1956",,"NO","NO",24878
+"15557","ND-1002-1528","1","14/04/2004","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","10","Lt/s",5495625,676103,"18","1956",,"NO","NO",24878
+"15559","ND-1002-1540","1","14/04/2004","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","1,5000","Lt/s",5502927,670135,"18","1956",,"NO","NO",24878
+"15687","ND-1002-1271","1","02/12/2003","Consuntivo","Superficial y Corriente","Rio Damas","Permanente y Continuo","21","Lt/s",5496821,671516,"18","1956",,"NO","NO",24878
+"15987","ND-1002-1211","1","04/09/2003","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","3","Lt/s",5503144,669784,"18","1956",,"NO","NO",24878
+"16736","ND-1002-930","1","29/05/2002","Consuntivo","Superficial y Corriente","Rio Moro","Permanente y Continuo","5","Lt/s",5496680,682330,"18","1956",,"NO","NO",24878
+"16737","ND-1002-932","1","29/05/2002","Consuntivo","Superficial y Corriente",,"Permanente y Continuo","5","Lt/s",5494810,680700,"18","1956",,"NO","NO",24878
+"16871","ND-1002-661","1","27/03/2002","Consuntivo","Superficial y Corriente","Estero Las Negras","Permanente y Continuo","25","Lt/s",5503320,678490,"18","1956",,"NO","NO",24878
+"16876","ND-1002-846","1","27/03/2002","Consuntivo","Superficial y Corriente","Rio Tijeral","Eventual y Discontinuo","1,5833","Lt/s",5498750,680920,"18","1956",,"NO","NO",24878
+"16877","ND-1002-846","1","27/03/2002","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","28,4167","Lt/s",5498750,680920,"18","1956",,"NO","NO",24878
+"17625","ND-1002-544","1","12/01/2000","Consuntivo","Superficial y Corriente","Estero sin Nombre","Permanente y Discontinuo","2,5000","Lt/s",5501070,681170,"18","1956",,"NO","NO",24878
+"17626","ND-1002-544","1","12/01/2000","Consuntivo","Superficial y Corriente","Estero sin Nombre","Eventual y Discontinuo","1,6667","Lt/s",5501070,681170,"18","1956",,"NO","NO",24878
+"18730","ND-1002-144","1","31/08/1990","Consuntivo","Superficial y Corriente","Estero De Pichil","Permanente y Alternado","30","Lt/s",5487870,682650,"18","1956",,"NO","NO",24878
+"18799","ND-1002-20","1","09/11/1987","Consuntivo","Superficial y Corriente","Rio Tijeral","Permanente y Continuo","76","Lt/s",5502900,670800,"18","1956",,"NO","NO",24878
+"10187","ND-1002-4037","1","07/09/2012","Consuntivo","Superficial y Corriente","Vertiente sin Nombre","Permanente y Discontinuo","0,0030","Lt/s",5496715,691330,"18","1969",,"NO","NO",29188
