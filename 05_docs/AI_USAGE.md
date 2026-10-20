@@ -156,3 +156,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: revisión del orden de ejecución; controles de archivos, configuración y paquetes; registro del estado de cada script; conservación de la base regional de caudales para utilizar estaciones donantes; unificación de rutas CAMELS e instrucciones para guardar los cambios en una rama de Git.
 - Verificación: se revisó la sintaxis del código propuesto y se realizaron pruebas controladas del maestro, incluyendo el orden de ejecución, la transferencia de objetos entre scripts y la detención ante errores. Queda pendiente confirmar la ejecución completa en el repositorio con todos los insumos reales.
 - Correcciones relevantes: se propuso crear la tabla regional base en el control de caudales, permitir la actualización del DEM existente y normalizar las rutas CAMELS. Se identificó una diferencia entre el área y la PET utilizadas en Budyko y en airGR que debe revisarse antes de comparar sus resultados.
+
+## Actualización del README con la preparación automatizada de CONAF y CIREN
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: actualizar la documentación para incorporar el script de preparación territorial proporcionado por Alexis.
+- Componente del trabajo: README.md e indicaciones de integración en 02_Rscripts/run_all.R.
+- Ejemplos de ayuda obtenida: revisión de las entradas y salidas de 06b_preparar_uso_suelo.R, descripción de la reproyección y el recorte, actualización del orden de ejecución a 18 scripts y ajuste de los insumos que debe comprobar el maestro.
+- Verificación: se revisó el contenido del script proporcionado y se identificaron sus archivos de entrada, campos requeridos, operaciones espaciales y productos. Queda pendiente registrar su ejecución con los datos originales y comprobar el flujo completo.
+- Correcciones relevantes: se sustituyó la descripción de preparación manual pendiente por el procedimiento automatizado. Se indicó que el maestro debe comprobar el ZIP de CONAF y el GeoJSON de CIREN, porque los GeoPackage se generan durante la ejecución.
