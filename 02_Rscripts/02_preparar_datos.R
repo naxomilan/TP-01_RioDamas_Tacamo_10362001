@@ -11,10 +11,15 @@ untar(
   exdir = proc
 )
 
-file.rename(
+if (!file.copy(
   file.path(proc, "output_hh.tif"),
-  file.path(proc, "dem_copernicus_glo30.tif")
-)
+  file.path(proc, "dem_copernicus_glo30.tif"),
+  overwrite = TRUE
+)) {
+  stop("No se pudo actualizar dem_copernicus_glo30.tif.")
+}
+
+unlink(file.path(proc, "output_hh.tif"))
 
 dem <- rast(file.path(proc, "dem_copernicus_glo30.tif"))
 
