@@ -349,3 +349,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: revisión de las diferencias de Git, ubicación de `06b_preparar_uso_suelo.R` antes del análisis territorial, ajuste de los insumos iniciales y explicación de la regla `.RDataTmp*`.
 - Verificación: se revisó la salida de git diff y se confirmó que el maestro incorpora 06b antes de 07 y comprueba los archivos originales de CONAF y CIREN. Queda pendiente registrar la ejecución completa y el resultado de la comprobación de exclusión del temporal.
 - Correcciones relevantes: la comprobación inicial pasó a solicitar los archivos originales que permiten generar los GeoPackage. Se amplió el patrón de exclusión para cubrir temporales con sufijos numéricos.
+
+## Actualización del script de derechos de agua — Ignacio Millán
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: orientar la actualización del repositorio y el trabajo en una rama para modificar el script de derechos de agua.
+- Componente del trabajo: procedimiento de Git asociado a `02_Rscripts/05_derechos_superficiales_DGA.R`.
+- Ejemplos de ayuda obtenida: comandos para actualizar main, crear una rama, abrir el archivo, revisar diferencias y publicar los cambios.
+- Verificación: pendiente registrar el resultado de la ejecución del script y la revisión de sus productos.
+- Correcciones relevantes: pendientes de describir según las modificaciones efectivamente realizadas.

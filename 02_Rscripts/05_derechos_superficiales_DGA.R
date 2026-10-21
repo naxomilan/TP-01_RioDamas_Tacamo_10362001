@@ -15,7 +15,7 @@ library(sf)
 # 2. LEER EL EXCEL
 
 # Omitir las seis filas anteriores a los encabezados.
-datos <- as.data.frame(read_excel("01_data/raw/Derechos_Concedidos_X_Region (1).xls",
+datos <- as.data.frame(read_excel("01_data/raw/Derechos_Concedidos_X_Region.xls",
                                   skip = 6,col_types = "text"))
 
 # Seleccionar las columnas necesarias del Excel revisado.
