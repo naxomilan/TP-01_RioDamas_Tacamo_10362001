@@ -44,59 +44,59 @@ for (f in huecos$inicio[huecos$metodo == "interpolacion_lineal"]) {
 
 # Febrero 2009: mediana climatologica obtenida en 08b
 i <- damas$FECHA >= as.Date("2009-02-01") &
-     damas$FECHA <= as.Date("2009-02-28") &
-     is.na(damas$Q_original)
+  damas$FECHA <= as.Date("2009-02-28") &
+  is.na(damas$Q_original)
 
 damas$Q_completado[i] <- Q_febrero
 damas$origen[i] <- "climatologia_febrero"
 
 # Bloques: regresion regional con donantes validados en 08b
 for (e in seq_len(nrow(eventos))) {
-
+  
   ini <- eventos$inicio[e]; fin <- eventos$fin[e]
   cod <- eventos$donante[e]
   a0 <- as.integer(format(ini, "%Y"))
   cruza <- as.integer(format(ini, "%Y") != format(fin, "%Y"))
   hist <- NULL
-
+  
   for (a in 1987:2019) {
     if (a == a0) next
-
+    
     ia <- as.Date(paste0(a, "-", format(ini, "%m-%d")))
     fa <- as.Date(paste0(a + cruza, "-", format(fin, "%m-%d")))
     n <- as.integer(fa - ia) + 1
-
+    
     qd <- base$Caudal_diario[
       base$CODIGO.ESTACION == 10362001 &
-      base$FECHA >= ia & base$FECHA <= fa]
-
+        base$FECHA >= ia & base$FECHA <= fa]
+    
     qv <- base$Caudal_diario[
       base$CODIGO.ESTACION == cod &
-      base$FECHA >= ia & base$FECHA <= fa]
-
+        base$FECHA >= ia & base$FECHA <= fa]
+    
     if (sum(!is.na(qd))/n >= .90 && sum(!is.na(qv))/n >= .90)
       hist <- rbind(hist, data.frame(
         Qd = mean(qd, na.rm = TRUE),
         Qv = mean(qv, na.rm = TRUE)
       ))
   }
-
+  
   mod <- lm(Qd ~ Qv, hist)
-
+  
   vec <- merge(
     data.frame(FECHA = seq(ini, fin, "day")),
     base[base$CODIGO.ESTACION == cod,
          c("FECHA","Caudal_diario")],
     by = "FECHA", all.x = TRUE
   )
-
+  
   Qv <- mean(vec$Caudal_diario, na.rm = TRUE)
   Qd <- max(as.numeric(predict(mod, data.frame(Qv = Qv))), 0)
   Qe <- Qd * vec$Caudal_diario / Qv
-
+  
   pos <- match(vec$FECHA, damas$FECHA)
   usar <- is.na(damas$Q_original[pos]) & !is.na(Qe)
-
+  
   damas$Q_completado[pos[usar]] <- Qe[usar]
   damas$origen[pos[usar]] <- "regresion_regional"
   damas$donante[pos[usar]] <- as.character(cod)
@@ -111,7 +111,7 @@ stopifnot(
   !anyNA(damas$Q_completado),
   all(damas$Q_completado >= 0),
   all(damas$Q_original == damas$Q_completado |
-      is.na(damas$Q_original))
+        is.na(damas$Q_original))
 )
 
 

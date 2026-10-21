@@ -358,3 +358,12 @@ Código CAMELS: 10362001
 - Ejemplos de ayuda obtenida: comandos para actualizar main, crear una rama, abrir el archivo, revisar diferencias y publicar los cambios.
 - Verificación: pendiente registrar el resultado de la ejecución del script y la revisión de sus productos.
 - Correcciones relevantes: pendientes de describir según las modificaciones efectivamente realizadas.
+
+## Publicación de la actualización de caudales y mapa — Ignacio Millán
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: orientar la publicación de una actualización de los scripts de caudales y la incorporación del mapa de la zona de estudio.
+- Componente del trabajo: procedimiento de Git para `02_Rscripts/08b_respaldo_relleno_Q.R`, `02_Rscripts/09_consistencia_Q.R` y el mapa ubicado en `03_outputs/figures/`.
+- Ejemplos de ayuda obtenida: comandos para crear una rama, seleccionar los archivos, revisar los cambios preparados y subirlos a GitHub.
+- Verificación: pendiente registrar la revisión de los cambios y las comprobaciones realizadas sobre los scripts y el mapa.
+- Correcciones relevantes: pendientes de detallar según las modificaciones efectivamente realizadas en los scripts.

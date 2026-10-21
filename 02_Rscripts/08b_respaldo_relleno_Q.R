@@ -48,7 +48,7 @@ huecos$metodo[
 
 feb <- damas[
   format(damas$FECHA, "%m") == "02" &
-  format(damas$FECHA, "%Y") != "2009",
+    format(damas$FECHA, "%Y") != "2009",
 ]
 
 feb_anual <- aggregate(
@@ -83,49 +83,49 @@ candidatas <- c(
 # ------------------------------------------------------------
 
 validar <- function(e, cod) {
-
+  
   ini <- eventos$inicio[e]
   fin <- eventos$fin[e]
   a0 <- as.integer(format(ini, "%Y"))
   cruza <- as.integer(format(ini, "%Y") != format(fin, "%Y"))
   x <- NULL
-
+  
   for (a in 1987:2019) {
     if (a == a0) next
-
+    
     ia <- as.Date(paste0(a, "-", format(ini, "%m-%d")))
     fa <- as.Date(paste0(a + cruza, "-", format(fin, "%m-%d")))
     n <- as.integer(fa - ia) + 1
-
+    
     qd <- base$Caudal_diario[
       base$CODIGO.ESTACION == 10362001 &
-      base$FECHA >= ia & base$FECHA <= fa]
-
+        base$FECHA >= ia & base$FECHA <= fa]
+    
     qv <- base$Caudal_diario[
       base$CODIGO.ESTACION == cod &
-      base$FECHA >= ia & base$FECHA <= fa]
-
+        base$FECHA >= ia & base$FECHA <= fa]
+    
     if (sum(!is.na(qd))/n >= .90 && sum(!is.na(qv))/n >= .90)
       x <- rbind(x, data.frame(
         Qd = mean(qd, na.rm = TRUE),
         Qv = mean(qv, na.rm = TRUE)
       ))
   }
-
+  
   if (is.null(x) || nrow(x) < 15) return(NULL)
-
+  
   pred <- sapply(seq_len(nrow(x)), function(i)
     max(predict(lm(Qd ~ Qv, x[-i,]), x[i,]), 0))
-
+  
   # Cobertura del donante durante el hueco real
   f <- seq(ini, fin, "day")
   q <- base$Caudal_diario[
     base$CODIGO.ESTACION == cod & base$FECHA %in% f
   ]
   cobertura <- 100 * sum(!is.na(q)) / length(f)
-
+  
   if (cobertura < 90) return(NULL)
-
+  
   data.frame(
     evento = e, codigo = cod, n_anios = nrow(x),
     cobertura = cobertura,
@@ -143,15 +143,15 @@ validar <- function(e, cod) {
 # ------------------------------------------------------------
 
 validacion <- do.call(rbind,
-  lapply(seq_len(nrow(eventos)), function(e)
-    do.call(rbind, lapply(candidatas, function(cod)
-      validar(e, cod)))
-  )
+                      lapply(seq_len(nrow(eventos)), function(e)
+                        do.call(rbind, lapply(candidatas, function(cod)
+                          validar(e, cod)))
+                      )
 )
 
 seleccion <- do.call(rbind,
-  lapply(split(validacion, validacion$evento), function(x)
-    x[which.min(x$error_med),])
+                     lapply(split(validacion, validacion$evento), function(x)
+                       x[which.min(x$error_med),])
 )
 
 rownames(seleccion) <- NULL
