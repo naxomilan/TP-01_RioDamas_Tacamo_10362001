@@ -205,3 +205,147 @@ Código CAMELS: 10362001
 - Ayuda obtenida: correccion en la redacción de las fichas a partir de las tablas de `03_outputs/`, tablas y pies de figura, e instrucciones de Git para la rama y los commits.
 - Verificación: las cifras de E03 y E04 salen de tablas que genera `run_all.R`. Las de E02 salen de esas tablas, de las tablas de los scripts de Alexis sobre el caudal (08, 08b y 09) y de los valores publicados por Correa Frías y Merlet Badilla (1997). Las fichas pasaron por dos revisiones separadas, una de formato y otra de cifras contra las tablas, ambas hechas también con Claude; E02 pasó además por una limpieza de estilo.
 - Correcciones relevantes: en la primera versión de E02 algunas cifras no salían de ningún script y ahora salen de `05_resumen_calidad_E02.csv`; se mezclaban 22 y 26 años de caudal y se unificó el criterio.
+
+## Verificación de la estación Río Damas en Tacamo — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la verificación de la estación hidrométrica y comparar su localización entre las fuentes DGA y CAMELS-CL.
+- Componente del trabajo: `02_Rscripts/01_verificar_estacion.R`, datos de estaciones DGA, atributos CAMELS-CL y productos de verificación.
+- Ejemplos de ayuda obtenida: revisión de la lectura de las fuentes, transformación de coordenadas a EPSG:32718, cálculo de distancias y comprobación de la ubicación del punto DGA respecto de la cuenca CAMELS-CL.
+- Verificación: según el registro de Alexis, se ejecutó el script y se obtuvo una separación aproximada de 1,52 km entre las ubicaciones comparadas. También se comprobó que el punto DGA se encontraba dentro de la cuenca de referencia CAMELS-CL.
+- Correcciones relevantes: se distinguió entre comprobar la consistencia espacial de las fuentes y seleccionar el punto de salida definitivo. La discrepancia de coordenadas se documentó sin atribuirla automáticamente a un error de alguna fuente.
+
+## Preparación del modelo digital de elevación e hidrografía — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la preparación de los datos espaciales necesarios para delimitar la cuenca.
+- Componente del trabajo: `02_Rscripts/02_preparar_datos.R`, DEM Copernicus GLO-30, hidrografía oficial y polígono CAMELS-CL.
+- Ejemplos de ayuda obtenida: revisión de la extracción y lectura del DEM, preparación de la hidrografía y explicación de la diferencia entre la zona de trabajo y el límite final de la cuenca.
+- Verificación: según el registro de Alexis, se comprobó la lectura de los insumos y la generación de los productos procesados. La zona de trabajo se definió con un margen de 5 km alrededor de la cuenca CAMELS-CL.
+- Correcciones relevantes: se aclaró que ese margen es una zona de trabajo y no la delimitación final. También se distinguió el recorte por extensión espacial de una intersección geométrica exacta.
+
+## Compatibilidad espacial de los datos — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: homogeneizar los sistemas de coordenadas antes del análisis hidrológico.
+- Componente del trabajo: `02_Rscripts/03_compatibilidad_espacial.R`, DEM e hidrografía procesada.
+- Ejemplos de ayuda obtenida: revisión de la reproyección, elección de EPSG:32718 como sistema de trabajo y comprobación de la resolución espacial.
+- Verificación: según el registro de Alexis, el DEM procesado quedó en EPSG:32718 con resolución de 30 m y la hidrografía fue transformada al mismo sistema.
+- Correcciones relevantes: se mantuvo la resolución de 30 m y se comprobó la compatibilidad espacial de los insumos antes de continuar con la delimitación.
+
+## Delimitación hidrológica de la cuenca — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la implementación y revisión de la delimitación de la cuenca Río Damas en Tacamo.
+- Componente del trabajo: `02_Rscripts/04_delimitar_cuenca.R`, DEM Copernicus GLO-30, WhiteboxTools, punto de salida, cuenca delimitada y red de drenaje.
+- Ejemplos de ayuda obtenida: explicación y revisión del acondicionamiento del DEM, dirección D8, acumulación de flujo, umbral de extracción de cauces, ajuste del punto de salida, delimitación y orden de Strahler.
+- Verificación: según el registro de Alexis, se obtuvo una cuenca de aproximadamente 468,73 km². El punto DGA se ajustó aproximadamente 758 m hacia una celda de la red de drenaje antes de delimitar.
+- Correcciones relevantes: se aclaró que el umbral de 4 km² controla la densidad de la red extraída y no define directamente el límite de la cuenca. Se distinguió el punto DGA original del punto ajustado utilizado en el algoritmo.
+
+## Comparación con la cuenca CAMELS-CL — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: evaluar la concordancia espacial entre la delimitación del proyecto y la cuenca de referencia CAMELS-CL.
+- Componente del trabajo: `02_Rscripts/05_comparar_cuenca.R`, `01_data/processed/cuenca_rio_damas.gpkg` y polígono CAMELS-CL.
+- Ejemplos de ayuda obtenida: cálculo e interpretación de áreas, intersección espacial, diferencia porcentual y superposición.
+- Verificación: según el registro de Alexis, las áreas fueron aproximadamente 468,73 km² para la cuenca delimitada y 466,77 km² para CAMELS-CL. La diferencia fue cercana al 0,42 % y la superficie común representó aproximadamente el 95,05 % del área CAMELS-CL.
+- Correcciones relevantes: las diferencias se interpretaron como discrepancias entre delimitaciones, sin considerar automáticamente a CAMELS-CL como un límite exacto que el procedimiento debiera reproducir.
+
+## Caracterización geomorfológica — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar el cálculo y la interpretación de indicadores geomorfológicos de la cuenca.
+- Componente del trabajo: `02_Rscripts/06_geomorfologia.R`, DEM recortado, red de drenaje, tablas y figuras.
+- Ejemplos de ayuda obtenida: revisión del cálculo de área, perímetro, elevaciones, relieve, pendiente, integral hipsométrica, densidad de drenaje y coeficiente de compacidad.
+- Verificación: según el registro de Alexis, se obtuvieron aproximadamente 468,73 km² de área, 169,86 km de perímetro, 135,74 m de elevación media, un rango altitudinal de 38,44 a 341,00 m, pendiente media de 2,33° e integral hipsométrica de 0,322. También se reportaron una densidad de drenaje de 0,65 km/km² y un coeficiente de compacidad de 2,21.
+- Correcciones relevantes: se evitó deducir una respuesta hidrológica o edad geomorfológica únicamente a partir de esos indicadores. Queda pendiente revisar el procedimiento utilizado para calcular la longitud total de la red de drenaje.
+
+## Preparación reproducible de CONAF y CIREN — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: documentar y automatizar la preparación de las capas territoriales desde los archivos originales.
+- Componente del trabajo: `02_Rscripts/06b_preparar_uso_suelo.R`, `01_data/raw/conaf_catastro_los_lagos_2018.zip`, `01_data/raw/ciren_suelos_los_lagos_2020.geojson`, `01_data/processed/cobertura_conaf_2018.gpkg` y `01_data/processed/suelos_ciren_2020.gpkg`.
+- Ejemplos de ayuda obtenida: identificación del shapefile de CONAF, revisión de los campos `USO` y `textcaus`, preparación del código de reproyección a EPSG:32718 y recorte mediante el polígono de la cuenca.
+- Verificación: Alexis documentó la revisión de los campos necesarios. El código proporcionado contiene comprobaciones de archivos, atributos e intersección con la cuenca. Queda pendiente registrar su ejecución y validar los productos regenerados dentro del flujo completo.
+- Correcciones relevantes: se incorporó una etapa explícita para generar los GeoPackage utilizados por `07_uso_suelo_territorio.R`. Se distinguió el sistema de coordenadas original de cada fuente del sistema de salida EPSG:32718.
+
+## Cobertura y capacidad de uso del suelo — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la caracterización territorial mediante información CONAF y CIREN.
+- Componente del trabajo: `02_Rscripts/07_uso_suelo_territorio.R`, cobertura CONAF 2018, capacidad de uso CIREN 2020 y productos asociados.
+- Ejemplos de ayuda obtenida: revisión del cálculo de superficies y porcentajes por clase, interpretación de categorías y diferenciación entre cobertura del suelo y capacidad de uso.
+- Verificación: los resultados documentados por Alexis indicaron aproximadamente 78,86 % de terrenos agrícolas y 17,10 % de bosques. Las clases II y III de CIREN representaron conjuntamente aproximadamente el 84,98 %. Estas cifras deben contrastarse con las salidas regeneradas al incorporar el script 06b.
+- Correcciones relevantes: se evitó interpretar categorías generales como especies forestales específicas. Se identificó una diferencia entre la suma de superficies categorizadas y el área delimitada, pendiente de revisar mediante la consistencia geométrica de las capas.
+
+## Control de calidad de caudales — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la revisión de calidad, cobertura y consistencia básica de los caudales diarios.
+- Componente del trabajo: `02_Rscripts/08_control_calidad_Q.R`, registros DGA y serie CAMELS-CL de la estación 10362001.
+- Ejemplos de ayuda obtenida: revisión de fechas, faltantes, duplicados, valores negativos, estadísticos descriptivos y comparación entre DGA y CAMELS-CL.
+- Verificación: según el registro de Alexis, para la serie completa disponible se identificaron 14.143 registros válidos y 602 días faltantes, con cobertura aproximada del 95,92 %. No se detectaron fechas duplicadas ni caudales negativos. La comparación entre fuentes respaldó conservar DGA como fuente principal.
+- Correcciones relevantes: se distinguió la serie completa disponible del período de análisis 1987–2019. Se evitó eliminar automáticamente caudales altos sin evidencia suficiente de errores de medición.
+
+## Evaluación de métodos de relleno de caudales — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la identificación de vacíos y la selección de métodos de reconstrucción para 1987–2019.
+- Componente del trabajo: `02_Rscripts/08b_respaldo_relleno_Q.R`, serie DGA de Río Damas y estaciones regionales candidatas.
+- Ejemplos de ayuda obtenida: identificación de períodos faltantes, interpolación para vacíos aislados, estimación climatológica para febrero de 2009 y evaluación de estaciones donantes mediante métricas de validación.
+- Verificación: según el registro de Alexis, se identificaron 347 días faltantes en 18 períodos: 5 días asignados a interpolación lineal, 28 días de febrero de 2009 a climatología y 314 días a reconstrucción regional. Se evaluaron nueve estaciones candidatas.
+- Correcciones relevantes: se evitó interpolar linealmente vacíos prolongados. Para febrero de 2009 se utilizó la mediana histórica de los caudales medios de febrero, equivalente a 0,905 m³/s. Se reconocieron diferencias de incertidumbre entre períodos reconstruidos.
+
+## Reconstrucción y consistencia de caudales — Alexis Llanquinao
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: apoyar la construcción de la serie diaria completa y la evaluación de su comportamiento estadístico.
+- Componente del trabajo: `02_Rscripts/09_consistencia_Q.R`, serie completada y resultados de pruebas de homogeneidad y estacionariedad.
+- Ejemplos de ayuda obtenida: implementación del relleno por método, transferencia del patrón diario desde estaciones donantes, identificación de datos observados y reconstruidos e interpretación de Pettitt, Buishand, SNHT, ADF, KPSS y Phillips-Perron.
+- Verificación: según el registro de Alexis, se obtuvo una serie de 12.053 días para 1987–2019, con 11.706 observaciones originales y 347 valores reconstruidos. Pettitt, Buishand y SNHT no rechazaron homogeneidad al nivel utilizado. KPSS y Phillips-Perron aportaron resultados compatibles con estacionariedad, mientras ADF no rechazó la presencia de raíz unitaria.
+- Correcciones relevantes: se interpretaron las pruebas como evidencia estadística, sin afirmar que demostraran homogeneidad o estacionariedad. Se conservó la identificación del origen de cada dato. La referencia al script se ajustó al nombre `09_consistencia_Q.R` utilizado en el proyecto.
+
+## Integración de datos para el balance hídrico — Vicente Rapiman
+
+- Herramienta utilizada: ChatGPT y Codex.
+- Finalidad: apoyar la elaboración, simplificación y revisión del código de integración hidrológica para 1987–2019.
+- Componente del trabajo: `02_Rscripts/03_integrar_datos_equipo.R`, `base_diaria_budyko.csv` y `base_anual_budyko.csv`.
+- Ejemplos de ayuda obtenida: generación y corrección de código para integrar precipitación, PET, caudal completado y derechos superficiales; revisar fechas y faltantes; convertir caudales de m³/s y derechos de L/s a láminas equivalentes; y calcular totales anuales.
+- Verificación: según el registro de Vicente, se revisaron las salidas de consola, tablas y figuras. Los resultados abarcaron 33 años, 12.053 días y 347 días de caudal estimado. Las conversiones se revisaron utilizando el área CAMELS de 466,7784 km².
+- Correcciones relevantes: se incorporó la serie completada de 1987–2019, se mantuvo la identificación de los días estimados y se consolidaron operaciones antes distribuidas en scripts preliminares.
+
+## Balance hídrico y ecuación de Fu — Vicente Rapiman
+
+- Herramienta utilizada: ChatGPT y Codex.
+- Finalidad: apoyar la programación, interpretación y presentación del balance hídrico medio y del análisis de Budyko.
+- Componente del trabajo: `02_Rscripts/04_balance_budyko.R`, tablas y figuras de balance, curva de Budyko, resumen anual y evolución de derechos superficiales.
+- Ejemplos de ayuda obtenida: generación y simplificación de código para aplicar la ecuación de Fu con w = 2,6, calcular índices y residuos, comprobar el período y mejorar las figuras.
+- Verificación: según el registro de Vicente, se contrastaron consola, tablas y figuras. La versión revisada entregó P = 1.588,01, PET = 1.009,93, ET de Fu = 837,03 y Q = 568,50 mm/año. El saldo al descontar derechos como demanda potencial fue 160,22 mm/año. Se comprobó que la ET estimada fuera positiva e inferior a P y PET.
+- Correcciones relevantes: se aclaró que los derechos representan un escenario de ejercicio completo y continuo, no consumo efectivo medido. También se explicó que el saldo no equivale a almacenamiento medido ni a disponibilidad de agua, y que la ubicación del punto sobre la curva de Fu deriva del propio cálculo.
+
+## Distribución espacial de derechos superficiales — Vicente Rapiman
+
+- Herramienta utilizada: ChatGPT y Codex.
+- Finalidad: apoyar el procesamiento de registros DGA y la elaboración del mapa en QGIS.
+- Componente del trabajo: `02_Rscripts/05_derechos_superficiales_DGA.R`, archivos CSV y GeoPackage derivados, proyecto QGIS y mapa de derechos superficiales.
+- Ejemplos de ayuda obtenida: código para seleccionar derechos superficiales consuntivos, asignar sistemas de coordenadas según datum y huso, transformar coordenadas, separar registros pendientes y seleccionar puntos mediante intersección con la cuenca.
+- Verificación: según el registro de Vicente, se revisaron las salidas y capturas de QGIS. La selección presentada incluyó 140 registros y 84 expedientes distintos.
+- Correcciones relevantes: se distinguió entre registros, expedientes y captaciones físicas. Se aclaró que un punto dentro del polígono no garantiza la exactitud de su coordenada. Se separó el análisis de distribución espacial del cálculo histórico de demanda potencial.
+
+## Integración de los registros de IA del equipo — Ignacio Millán
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: incorporar al registro común las declaraciones de uso de IA proporcionadas por Alexis y Vicente.
+- Componente del trabajo: `05_docs/AI_USAGE.md`.
+- Ejemplos de ayuda obtenida: lectura de los documentos aportados, organización de las entradas con el formato común, identificación del integrante asociado e instrucciones para actualizar el repositorio y trabajar en una rama.
+- Verificación: se contrastó la redacción con los dos documentos aportados y se revisó el código compartido de preparación de CONAF y CIREN. Las comprobaciones técnicas realizadas por los integrantes se conservaron como declaraciones de sus respectivos registros. Queda pendiente revisar el cambio final y publicarlo.
+- Correcciones relevantes: se ajustó la referencia a `09_consistencia_Q.R`, se distinguió el CRS original de las capas del sistema de salida de 06b y se mantuvieron explícitas las verificaciones pendientes.
+
+## Integración de 06b y exclusión de temporales de R — Ignacio Millán
+
+- Herramienta utilizada: ChatGPT.
+- Finalidad: integrar la preparación de CONAF y CIREN en la ejecución del proyecto y evitar incorporar archivos temporales de R al repositorio.
+- Componente del trabajo: `02_Rscripts/run_all.R` y `.gitignore`.
+- Ejemplos de ayuda obtenida: revisión de las diferencias de Git, ubicación de `06b_preparar_uso_suelo.R` antes del análisis territorial, ajuste de los insumos iniciales y explicación de la regla `.RDataTmp*`.
+- Verificación: se revisó la salida de git diff y se confirmó que el maestro incorpora 06b antes de 07 y comprueba los archivos originales de CONAF y CIREN. Queda pendiente registrar la ejecución completa y el resultado de la comprobación de exclusión del temporal.
+- Correcciones relevantes: la comprobación inicial pasó a solicitar los archivos originales que permiten generar los GeoPackage. Se amplió el patrón de exclusión para cubrir temporales con sufijos numéricos.

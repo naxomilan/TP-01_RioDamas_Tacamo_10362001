@@ -31,6 +31,7 @@ ejecutar_proyecto_tp <- function() {
     "04_delimitar_cuenca.R",
     "05_comparar_cuenca.R",
     "06_geomorfologia.R",
+    "06b_preparar_uso_suelo.R",
     "07_uso_suelo_territorio.R",
     
     # Caudales: control, reconstruccion y consistencia.
@@ -264,8 +265,8 @@ ejecutar_proyecto_tp <- function() {
     "01_data/raw/Red_Hidrografica_Final.zip",
     "01_data/raw/caudal_diario_historico_dga_los_lagos.zip",
     "01_data/raw/Derechos_Concedidos_X_Region (1).xls",
-    "01_data/processed/cobertura_conaf_2018.gpkg",
-    "01_data/processed/suelos_ciren_2020.gpkg"
+    "01_data/raw/conaf_catastro_los_lagos_2018.zip",
+    "01_data/raw/ciren_suelos_los_lagos_2020.geojson"
   ))
   
   # Preparar CAMELS conservando los archivos originales existentes.
